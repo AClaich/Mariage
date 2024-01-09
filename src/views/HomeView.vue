@@ -11,27 +11,39 @@ import { Form, FormItem, Input, Button } from 'ant-design-vue';
 
 
 <template>
-  <a-form @submit="handleSubmit()">
-    <a-form-item label="Nom d'utilisateur">
-      <a-input :v-bind="username" />
+  <a-form :model="formState" name="basic" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }" autocomplete="off"
+    @finish="onFinish" @finishFailed="onFinishFailed">
+    <a-form-item label="Username" name="username" :rules="[{ required: true, message: 'Please input your username!' }]">
+      <a-input v-model:value="formState.username" />
     </a-form-item>
-    <a-form-item label="Mot de passe">
-      <a-input type="password" :v-model="password" />
+
+    <a-form-item label="Password" name="password" :rules="[{ required: true, message: 'Please input your password!' }]">
+      <a-input-password v-model:value="formState.password" />
     </a-form-item>
-    <a-form-item>
+
+    <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
       <a-button type="primary" html-type="submit">Se connecter</a-button>
     </a-form-item>
   </a-form>
 </template>
 
-<script setup lang="ts">
-defineProps<{
-      username: '',
-      password: '',
-}>()
+<script lang="ts" setup>
+import { reactive } from 'vue';
 
-const handleSubmit = () => {
-  // Ajoutez ici la logique de gestion de la connexion avec Vuex ou une requête HTTP
-  // Enregistrez l'état de connexion dans votre store Vuex si nécessaire
+interface FormState {
+  username: string;
+  password: string;
 }
+
+const formState = reactive<FormState>({
+  username: '',
+  password: '',
+});
+const onFinish = (values: any) => {
+  console.log('Success:', values);
+};
+
+const onFinishFailed = (errorInfo: any) => {
+  console.log('Failed:', errorInfo);
+};
 </script>
