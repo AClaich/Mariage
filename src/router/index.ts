@@ -1,21 +1,54 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
+import AccueilView from '../views/AccueilView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: LoginView
+      path: '/accueil',
+      name: 'accueil',
+      component: AccueilView
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/prog',
+      name: 'prog',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/ProgView.vue')
+    },
+    {
+      path: '/hebergement',
+      name: 'hebergement',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/HebergementView.vue')
+    },
+    {
+      path: '/reponse',
+      name: 'reponse',
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem('user') === null) {
+          next('/login')
+        } else {
+          next()
+        }
+      },
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/FormResponseView.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/accueil'
     }
   ]
 })
