@@ -1,15 +1,3 @@
-<!-- <script>
-import { defineProps } from 'vue';
-import { Form, FormItem, Input, Button } from 'ant-design-vue';
-</script> -->
-
-<!-- <template>
-  <main>
-    <TheWelcome />
-  </main>
-</template> -->
-
-
 <template>
   <a-form :model="formState" name="basic" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }" autocomplete="off"
     @finish="onFinish" @finishFailed="onFinishFailed">
@@ -33,9 +21,10 @@ import { Form, FormItem, Input, Button } from 'ant-design-vue';
 import { onMounted, reactive } from 'vue';
 import Papa from 'papaparse';
 import { useRouter } from 'vue-router';
-import type { LoginFormState, UserEntity } from 'src/common/interfaces.ts';
+import type { LoginFormState, UserEntity } from '@/common/interfaces';
+import { useStore } from 'vuex';
 
-
+const store = useStore();
 
 const formState = reactive<LoginFormState>({
   username: '',
@@ -73,7 +62,7 @@ const onFinish = (values: LoginFormState) => {
   });
 
   if (user) {
-    localStorage.setItem('user', JSON.stringify(user));
+    store.commit('setCurrentUser', user);
     router.push('/reponse');
   } else {
     alert('Identifiant ou mot de passe incorrect !');

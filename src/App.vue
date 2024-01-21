@@ -3,17 +3,20 @@ import { RouterLink, RouterView } from 'vue-router'
 import { ref, onUnmounted, onMounted } from 'vue';
 import { MenuOutlined, UserOutlined } from '@ant-design/icons-vue';
 import type { DrawerProps } from 'ant-design-vue';
-import type { UserEntity } from 'src/common/interfaces.ts';
+import type { UserEntity } from '@/common/interfaces';
+import { useStore } from 'vuex';
 
 const selectedKeys = ref<string[]>(['4']);
+const store = useStore();
 
 const placement = ref<DrawerProps['placement']>('left');
 const open = ref<boolean>(false);
-const currentUser = ref<UserEntity | undefined>(undefined);
+const currentUser = ref<{ user1: UserEntity; user2: UserEntity } | undefined>(undefined);
 
 onMounted(async () => {
-  const user = localStorage.getItem('user') || '{}';
-  currentUser.value = user ? JSON.parse(user) : null;
+  store.commit('getCurrentUser');
+
+  currentUser.value = store.getters.currentUser;
 });
 
 const showDrawer = () => {
@@ -60,7 +63,9 @@ defineProps(['currentUser']);
       </a-menu-item>
     </a-menu>
     <template #extra>
-      <span v-if="currentUser">{{ currentUser.prenom }} {{ currentUser.nom }}</span><UserOutlined />
+      <span v-if="currentUser.user1">{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span> <span
+        v-if="currentUser.user2">& {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span>
+      <UserOutlined class="user-icon" />
     </template>
   </a-drawer>
   <header>
@@ -69,7 +74,13 @@ defineProps(['currentUser']);
       <RouterLink to="/prog">Programmation</RouterLink>
       <RouterLink to="/hebergement">Hébergement</RouterLink>
       <RouterLink to="/reponse">Réponse</RouterLink>
-      <UserOutlined />
+      <a-popover trigger="hover" placement="bottom">
+        <template #title>
+          <h3 class="text-center"><span v-if="currentUser.user1">{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span>
+          <span v-if="currentUser.user2"> & {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span></h3>
+        </template>
+        <UserOutlined />
+      </a-popover>
     </nav>
   </header>
 
@@ -83,6 +94,10 @@ defineProps(['currentUser']);
   @media (max-width: 1024px) {
     padding: 3rem;
   }
+}
+
+.user-icon {
+  margin: 8px;
 }
 
 header {
@@ -129,6 +144,10 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
+}
+
+a-popover {
+  width: 800px;
 }
 
 @media (min-width: 1024px) {

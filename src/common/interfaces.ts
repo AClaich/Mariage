@@ -1,12 +1,13 @@
 export interface FormState {
-  participation1: string[];
-  participation2: string[];
-  vegetarien1: boolean;
-  vegetarien2: boolean;
-  hebergement1: boolean;
-  hebergement2: boolean;
-  jourHebergement1: string[];
-  jourHebergement2: string[];
+  user1: UserFormState;
+  user2: UserFormState;
+}
+
+export interface UserFormState {
+  participation: string[];
+  vegetarien: boolean;
+  hebergement: boolean;
+  jourHebergement: string[];
 }
 
 export interface UserEntity {
@@ -39,4 +40,12 @@ export interface UserEntity {
 export interface LoginFormState {
   username: string;
   password: string;
+}
+
+export interface State {
+  count: number;
+  currentUser: {
+    user1: UserEntity;
+    user2: UserEntity;
+  };
 }

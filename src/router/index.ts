@@ -30,7 +30,7 @@ const router = createRouter({
       path: '/reponse',
       name: 'reponse',
       beforeEnter: (to, from, next) => {
-        if (localStorage.getItem('user') === null) {
+        if (localStorage.getItem('currentUser') === null) {
           next('/login')
         } else {
           next()
