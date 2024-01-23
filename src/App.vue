@@ -5,6 +5,7 @@ import { MenuOutlined, UserOutlined } from '@ant-design/icons-vue';
 import type { DrawerProps } from 'ant-design-vue';
 import type { UserEntity } from '@/common/interfaces';
 import { useStore } from 'vuex';
+import axios from 'axios';
 
 const selectedKeys = ref<string[]>(['4']);
 const store = useStore();
@@ -17,6 +18,20 @@ onMounted(async () => {
   store.commit('getCurrentUser');
 
   currentUser.value = store.getters.currentUser;
+
+  const headers = {
+    Authorization: 'Bearer 443a1c404fea3fd5b0ff13cba26f18188f9d7c625ee64eeb8951110bf84ff83fb5384fdc618f33412f376c7dc26a80fd92696daef7296601e91fe48ac0ef3b274e638886b2615a73856f35493593da85785c045ee3d002b7d92c5206edecb19ca9b12675c440deda78248f2811d00fd0d519b3047246e4568a2856b800d5d262'
+  };
+
+  (await axios.get('http://localhost:4200/api/dataconnexions', { headers })
+    .then(response => {
+      // Stockez les données dans votre variable myData
+      let myData = response.data;
+      console.log(myData);
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des données:', error);
+    }));
 });
 
 const showDrawer = () => {
@@ -28,7 +43,7 @@ const onClose = () => {
 };
 
 onUnmounted(() => {
-  localStorage.clear();
+  store.commit('clearCurrentUser');
 });
 
 
@@ -75,9 +90,11 @@ defineProps(['currentUser']);
       <RouterLink to="/hebergement">Hébergement</RouterLink>
       <RouterLink to="/reponse">Réponse</RouterLink>
       <a-popover trigger="hover" placement="bottom">
-        <template #title>
-          <h3 class="text-center"><span v-if="currentUser.user1">{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span>
-          <span v-if="currentUser.user2"> & {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span></h3>
+        <template #title v-if="currentUser">
+          <h3 class="text-center"><span v-if="currentUser.user1">{{ currentUser.user1.prenom }} {{ currentUser.user1.nom
+          }}</span>
+            <span v-if="currentUser.user2"> & {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span>
+          </h3>
         </template>
         <UserOutlined />
       </a-popover>

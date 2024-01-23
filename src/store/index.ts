@@ -35,6 +35,10 @@ const store = createStore<State>({
       const currentUser = localStorage.getItem("currentUser") || "{}";
       state.currentUser = currentUser ? JSON.parse(currentUser) : null;
     },
+    clearCurrentUser(state: any) {
+      state.currentUser = null;
+      localStorage.removeItem("currentUser");
+    }
   },
   getters: {
     currentUser(state: any) {

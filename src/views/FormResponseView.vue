@@ -139,7 +139,7 @@ a-button {
 </template>
 
 <script setup lang="ts">
-import { onUnmounted, onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import Papa from 'papaparse';
 import type { UnwrapRef } from 'vue';
 import type { FormState, UserEntity } from '@/common/interfaces';
@@ -215,7 +215,7 @@ const onSubmit = () => {
 
   console.log(csvContent);
   
-  const filePath = path.join(__dirname, '../assets/DataConnexion.csv');
+  // const filePath = path.join(__dirname, '../assets/DataConnexion.csv');
 
   // const blob = new Blob([csvContent], { type: 'text/csv' });
 
@@ -230,9 +230,9 @@ const onSubmit = () => {
 const labelCol = { span: 12 };
 const wrapperCol = { span: 12 };
 
-onUnmounted(() => {
-  localStorage.clear();
-});
+// onUnmounted(() => {
+//   localStorage.clear();
+// });
 
 defineProps(['currentUser']);
 </script>
