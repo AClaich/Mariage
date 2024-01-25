@@ -146,8 +146,6 @@ import type { FormState, UserEntity } from '@/common/interfaces';
 import { useStore } from 'vuex';
 
 const store = useStore();
-// const fs = require('fs');
-// const path = require('path');
 
 const formState: UnwrapRef<FormState> = reactive({
   user1: {
@@ -214,8 +212,10 @@ const onSubmit = () => {
   const csvContent = Papa.unparse(users, { delimiter: ',' });
 
   console.log(csvContent);
+
   
-  const filePath = path.join(__dirname, '../assets/DataConnexion.csv');
+  
+  // const filePath = path.join(__dirname, '../assets/DataConnexion.csv');
 
   // const blob = new Blob([csvContent], { type: 'text/csv' });
 

@@ -1,22 +1,33 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import { ref, onUnmounted, onMounted } from 'vue';
-import { MenuOutlined, UserOutlined } from '@ant-design/icons-vue';
-import type { DrawerProps } from 'ant-design-vue';
-import type { UserEntity } from '@/common/interfaces';
-import { useStore } from 'vuex';
+import { RouterLink, RouterView } from "vue-router";
+import { ref, onUnmounted, onMounted } from "vue";
+import { MenuOutlined, UserOutlined } from "@ant-design/icons-vue";
+import type { DrawerProps } from "ant-design-vue";
+import type { UserEntity } from "@/common/interfaces";
+import { useStore } from "vuex";
+import axios from 'axios';
 
-const selectedKeys = ref<string[]>(['4']);
+const selectedKeys = ref<string[]>(["4"]);
 const store = useStore();
 
-const placement = ref<DrawerProps['placement']>('left');
+const placement = ref<DrawerProps["placement"]>("left");
 const open = ref<boolean>(false);
-const currentUser = ref<{ user1: UserEntity; user2: UserEntity } | undefined>(undefined);
+const currentUser = ref<{ user1: UserEntity; user2: UserEntity } | undefined>(
+  undefined
+);
 
 onMounted(async () => {
-  store.commit('getCurrentUser');
+  console.log('test')
+  store.commit("getCurrentUser");
 
   currentUser.value = store.getters.currentUser;
+
+  try {
+    const users = await axios.get("http://localhost:4200/api/dataconnexions");
+    console.log(users);
+  } catch (error) {
+    console.error("Error parsing CSV:", error);
+  }
 });
 
 const showDrawer = () => {
@@ -31,8 +42,7 @@ onUnmounted(() => {
   localStorage.clear();
 });
 
-
-defineProps(['currentUser']);
+defineProps(["currentUser"]);
 </script>
 
 <template>
@@ -63,8 +73,12 @@ defineProps(['currentUser']);
       </a-menu-item>
     </a-menu>
     <template #extra>
-      <span v-if="currentUser.user1">{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span> <span
-        v-if="currentUser.user2">& {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span>
+      <span v-if="currentUser.user1"
+        >{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span
+      >
+      <span v-if="currentUser.user2"
+        >& {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span
+      >
       <UserOutlined class="user-icon" />
     </template>
   </a-drawer>
@@ -76,8 +90,14 @@ defineProps(['currentUser']);
       <RouterLink to="/reponse">Réponse</RouterLink>
       <a-popover trigger="hover" placement="bottom">
         <template #title>
-          <h3 class="text-center"><span v-if="currentUser.user1">{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span>
-          <span v-if="currentUser.user2"> & {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span></h3>
+          <h3 class="text-center">
+            <span v-if="currentUser.user1"
+              >{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span
+            >
+            <span v-if="currentUser.user2">
+              & {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span
+            >
+          </h3>
         </template>
         <UserOutlined />
       </a-popover>
@@ -181,7 +201,7 @@ a-popover {
   background: #fff;
 }
 
-[data-theme='dark'] .site-layout-sub-header-background {
+[data-theme="dark"] .site-layout-sub-header-background {
   background: #141414;
 }
 
