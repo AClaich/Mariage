@@ -1,4 +1,4 @@
-nom,prenom,number,email,password,is_vin,is_reception,is_retour,presence_vin_1,presence_vin_2,presence_reception_1,presence_reception_2,presence_retour_1,presence_retour_2,vegetarien_1,vegetarien_2,logement_1,logement_2,jeudi_1,vendredi_1,samedi_1,jeudi_2,vendredi_2,samedi_2
+nom,prenom,number,email,password,is_vin,is_reception,is_retour,can_invite,presence_vin_1,presence_vin_2,presence_reception_1,presence_reception_2,presence_retour_1,presence_retour_2,vegetarien_1,vegetarien_2,logement_1,logement_2,jeudi_1,vendredi_1,samedi_1,jeudi_2,vendredi_2,samedi_2
 Amoyel,Alan,1,alanamoyel06@gmail.com,iontod,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Bader,Alicia,1,alicia.bader97@gmail.com,nzxcda,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Baloi,Ugo & Chloé,2,ugo-ballois@hotmail.fr,aneywa,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

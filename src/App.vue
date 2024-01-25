@@ -5,7 +5,7 @@ import { MenuOutlined, UserOutlined } from "@ant-design/icons-vue";
 import type { DrawerProps } from "ant-design-vue";
 import type { UserEntity } from "@/common/interfaces";
 import { useStore } from "vuex";
-import axios from 'axios';
+import axios from "axios";
 
 const selectedKeys = ref<string[]>(["4"]);
 const store = useStore();
@@ -17,7 +17,7 @@ const currentUser = ref<{ user1: UserEntity; user2: UserEntity } | undefined>(
 );
 
 onMounted(async () => {
-  console.log('test')
+  console.log("test");
   store.commit("getCurrentUser");
 
   currentUser.value = store.getters.currentUser;
@@ -39,7 +39,7 @@ const onClose = () => {
 };
 
 onUnmounted(() => {
-  localStorage.clear();
+  store.commit("clearCurrentUser");
 });
 
 defineProps(["currentUser"]);
