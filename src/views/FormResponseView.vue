@@ -140,10 +140,10 @@ a-button {
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue';
-import Papa from 'papaparse';
 import type { UnwrapRef } from 'vue';
 import type { FormState, UserEntity } from '@/common/interfaces';
 import { useStore } from 'vuex';
+import axios from "axios";
 
 const store = useStore();
 
@@ -162,56 +162,58 @@ const formState: UnwrapRef<FormState> = reactive({
   },
 });
 
-let users: UserEntity[] = [];
 const currentUser = ref<{ user1: UserEntity; user2: UserEntity } | undefined>(undefined);
 
 onMounted(async () => {
   currentUser.value = store.getters.currentUser;
   console.log(currentUser);
 
-  try {
-    const response = await fetch('src/assets/DataConnexion.csv');
-    const csvData = await response.text();
+  // try {
+  //   const response = await fetch('src/assets/DataConnexion.csv');
+  //   const csvData = await response.text();
 
-    Papa.parse(csvData, {
-      header: true,
-      delimiter: ',',
-      dynamicTyping: true,
-      complete: (results: any) => {
-        users = results.data as UserEntity[];
-      },
-    });
-  } catch (error) {
-    console.error('Error parsing CSV:', error);
-  }
+  //   Papa.parse(csvData, {
+  //     header: true,
+  //     delimiter: ',',
+  //     dynamicTyping: true,
+  //     complete: (results: any) => {
+  //       users = results.data as UserEntity[];
+  //     },
+  //   });
+  // } catch (error) {
+  //   console.error('Error parsing CSV:', error);
+  // }
 });
 
 const onSubmit = () => {
-  users = users.map((user: UserEntity) => {
-    if (user.email === currentUser.value?.user1.email) {
-      user.presenceVin1 = formState.user1.participation.includes('1') ? 1 : 0;
-      user.presenceReception1 = formState.user1.participation.includes('2') ? 1 : 0;
-      user.presenceRetour1 = formState.user1.participation.includes('3') ? 1 : 0;
-      user.vegetarien1 = formState.user1.vegetarien ? 1 : 0;
-      user.logement1 = formState.user1.hebergement ? 1 : 0;
-      user.jeudi1 = formState.user1.jourHebergement.includes('1') ? 1 : 0;
-      user.vendredi1 = formState.user1.jourHebergement.includes('2') ? 1 : 0;
-      user.samedi1 = formState.user1.jourHebergement.includes('3') ? 1 : 0;
 
-      user.presenceVin2 = formState.user2.participation.includes('1') ? 1 : 0;
-      user.presenceReception2 = formState.user2.participation.includes('2') ? 1 : 0;
-      user.presenceRetour2 = formState.user2.participation.includes('3') ? 1 : 0;
-      user.vegetarien2 = formState.user2.vegetarien ? 1 : 0;
-      user.logement2 = formState.user2.hebergement ? 1 : 0;
-      user.jeudi2 = formState.user2.jourHebergement.includes('1') ? 1 : 0;
-      user.vendredi2 = formState.user2.jourHebergement.includes('2') ? 1 : 0;
-      user.samedi2 = formState.user2.jourHebergement.includes('3') ? 1 : 0;
-    }
-    return user;
-  });
-  const csvContent = Papa.unparse(users, { delimiter: ',' });
 
-  console.log(csvContent);
+
+  // users = users.map((user: UserEntity) => {
+  //   if (user.email === currentUser.value?.user1.email) {
+  //     user.presenceVin1 = formState.user1.participation.includes('1') ? 1 : 0;
+  //     user.presenceReception1 = formState.user1.participation.includes('2') ? 1 : 0;
+  //     user.presenceRetour1 = formState.user1.participation.includes('3') ? 1 : 0;
+  //     user.vegetarien1 = formState.user1.vegetarien ? 1 : 0;
+  //     user.logement1 = formState.user1.hebergement ? 1 : 0;
+  //     user.jeudi1 = formState.user1.jourHebergement.includes('1') ? 1 : 0;
+  //     user.vendredi1 = formState.user1.jourHebergement.includes('2') ? 1 : 0;
+  //     user.samedi1 = formState.user1.jourHebergement.includes('3') ? 1 : 0;
+
+  //     user.presenceVin2 = formState.user2.participation.includes('1') ? 1 : 0;
+  //     user.presenceReception2 = formState.user2.participation.includes('2') ? 1 : 0;
+  //     user.presenceRetour2 = formState.user2.participation.includes('3') ? 1 : 0;
+  //     user.vegetarien2 = formState.user2.vegetarien ? 1 : 0;
+  //     user.logement2 = formState.user2.hebergement ? 1 : 0;
+  //     user.jeudi2 = formState.user2.jourHebergement.includes('1') ? 1 : 0;
+  //     user.vendredi2 = formState.user2.jourHebergement.includes('2') ? 1 : 0;
+  //     user.samedi2 = formState.user2.jourHebergement.includes('3') ? 1 : 0;
+  //   }
+  //   return user;
+  // });
+  // const csvContent = Papa.unparse(users, { delimiter: ',' });
+
+  // console.log(csvContent);
 
   
   

@@ -45,7 +45,8 @@ export interface LoginFormState {
 export interface State {
   count: number;
   currentUser: {
-    user1: UserEntity;
-    user2: UserEntity;
-  };
+    user1: UserEntity | null;
+    user2: UserEntity | null;
+  } | null;
+  listUser: UserEntity[] | null,
 }

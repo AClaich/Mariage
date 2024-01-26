@@ -18,11 +18,11 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive } from 'vue';
-import Papa from 'papaparse';
+import { onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import type { LoginFormState, UserEntity } from '@/common/interfaces';
 import { useStore } from 'vuex';
+import axios from "axios";
 
 const store = useStore();
 
@@ -33,24 +33,25 @@ const formState = reactive<LoginFormState>({
 
 const router = useRouter();
 
-let users: UserEntity[] = [];
+const listUsers = ref<UserEntity[] | undefined>(undefined);
 
 onMounted(async () => {
-  try {
-    const response = await fetch('src/assets/DataConnexion.csv');
-    const csvData = await response.text();
+  // try {
+  //   const response = await fetch('src/assets/DataConnexion.csv');
+  //   const csvData = await response.text();
 
-    Papa.parse(csvData, {
-          header: true,
-          delimiter: ',',
-          dynamicTyping: true,
-          complete: (results: any) => {
-            users = results.data as UserEntity[];
-          },
-        });
-  } catch (error) {
-    console.error('Error parsing CSV:', error);
-  }
+  //   Papa.parse(csvData, {
+  //         header: true,
+  //         delimiter: ',',
+  //         dynamicTyping: true,
+  //         complete: (results: any) => {
+  //           users = results.data as UserEntity[];
+  //         },
+  //       });
+  // } catch (error) {
+  //   console.error('Error parsing CSV:', error);
+  // }
+  listUsers.value = store.getters.listUsers;
 });
 
 const onFinish = (values: LoginFormState) => {
