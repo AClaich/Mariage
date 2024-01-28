@@ -11,6 +11,11 @@ export interface UserFormState {
 }
 
 export interface UserEntity {
+  id: number;
+  attributes: UserAttributes;
+}
+
+export interface UserAttributes {
   prenom: string;
   nom: string;
   email: string;
@@ -43,10 +48,10 @@ export interface LoginFormState {
 }
 
 export interface State {
-  count: number;
   currentUser: {
-    user1: UserEntity | null;
-    user2: UserEntity | null;
+    id: number;
+    user1: UserAttributes;
+    user2: UserAttributes;
   } | null;
-  listUser: UserEntity[] | null,
+  listUsers: UserEntity[] | null;
 }

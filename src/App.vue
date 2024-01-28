@@ -5,29 +5,19 @@ import { MenuOutlined, UserOutlined } from "@ant-design/icons-vue";
 import type { DrawerProps } from "ant-design-vue";
 import type { UserEntity } from "@/common/interfaces";
 import { useStore } from "vuex";
-import axios from "axios";
 
 const selectedKeys = ref<string[]>(["4"]);
 const store = useStore();
 
 const placement = ref<DrawerProps["placement"]>("left");
 const open = ref<boolean>(false);
-const currentUser = ref<{ user1: UserEntity; user2: UserEntity } | undefined>(
-  undefined
-);
+const currentUser = ref<{id: number; user1: UserEntity; user2: UserEntity } | undefined>(undefined);
 
 onMounted(async () => {
-  console.log("test");
-  store.commit("getCurrentUser");
+  store.commit("setListUsers");
+  store.commit("setCurrentUser");
 
   currentUser.value = store.getters.currentUser;
-
-  try {
-    const users = await axios.get("http://localhost:4200/api/dataconnexions");
-    console.log(users);
-  } catch (error) {
-    console.error("Error parsing CSV:", error);
-  }
 });
 
 const showDrawer = () => {
@@ -36,6 +26,10 @@ const showDrawer = () => {
 
 const onClose = () => {
   open.value = false;
+};
+
+const logout = () => {
+  store.commit("clearCurrentUser");
 };
 
 onUnmounted(() => {
@@ -98,6 +92,7 @@ defineProps(["currentUser"]);
               & {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span
             >
           </h3>
+          <span :onClick="logout"><LogoutOutlined /> Se déconnecter</span>
         </template>
         <UserOutlined />
       </a-popover>

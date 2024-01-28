@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import LoginView from '../views/LoginView.vue'
-import AccueilView from '../views/AccueilView.vue'
+import LoginView from '@/views/LoginView.vue';
+import AccueilView from '@/views/AccueilView.vue';
+import { useStore } from "vuex";
+
+const store = useStore();
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,10 +33,10 @@ const router = createRouter({
       path: '/reponse',
       name: 'reponse',
       beforeEnter: (to, from, next) => {
-        if (localStorage.getItem('currentUser') === null) {
-          next('/login')
+        if (localStorage.getItem("currentUser") === null) {
+          next('/login');
         } else {
-          next()
+          next();
         }
       },
       // route level code-splitting
