@@ -27,8 +27,8 @@ a-button {
           <a-col :xxl="12"> </a-col>
           <a-col :xxl="6">
             <span v-if="currentUser?.user1"
-              >{{ currentUser?.user1.prenom }}
-              {{ currentUser?.user1.nom }}</span
+              >{{ currentUser?.user1?.prenom }}
+              {{ currentUser?.user1?.nom }}</span
             >
           </a-col>
           <a-col :xxl="6">
@@ -213,7 +213,7 @@ a-button {
 <script setup lang="ts">
 import { onMounted, reactive, computed } from "vue";
 import type { UnwrapRef } from "vue";
-import type { FormState, UserEntity } from "@/common/interfaces";
+import type { FormState, UserAttributes } from "@/common/interfaces";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -234,41 +234,42 @@ const formState: UnwrapRef<FormState> = reactive({
 });
 
 const currentUser = computed(
-  (): { user1: UserEntity; user2: UserEntity } => store.currentUser
+  (): {id: number; user1: UserAttributes; user2: UserAttributes } => store.getters.currentUser
 );
 
+
 onMounted(() => {
-  if (currentUser.value) {
-    if (currentUser.value.user1.attributes.presenceVin1)
+  if (currentUser.value.id) {
+    if (currentUser.value.user1.presenceVin1)
       formState.user1.participation.push("1");
-    if (currentUser.value.user1.attributes.presenceReception1)
+    if (currentUser.value.user1.presenceReception1)
       formState.user1.participation.push("2");
-    if (currentUser.value.user1.attributes.presenceRetour1)
+    if (currentUser.value.user1.presenceRetour1)
       formState.user1.participation.push("3");
 
-    if (currentUser.value.user2.attributes.presenceVin2)
+    if (currentUser.value.user2.presenceVin2)
       formState.user2.participation.push("1");
-    if (currentUser.value.user2.attributes.presenceReception2)
+    if (currentUser.value.user2.presenceReception2)
       formState.user2.participation.push("2");
-    if (currentUser.value.user2.attributes.presenceRetour2)
+    if (currentUser.value.user2.presenceRetour2)
       formState.user2.participation.push("3");
 
-    if (currentUser.value.user2.attributes.jeudi2)
+    if (currentUser.value.user2.jeudi2)
       formState.user2.jourHebergement.push("1");
-    if (currentUser.value.user2.attributes.vendredi2)
+    if (currentUser.value.user2.vendredi2)
       formState.user2.jourHebergement.push("2");
-    if (currentUser.value.user2.attributes.samedi2)
+    if (currentUser.value.user2.samedi2)
       formState.user2.jourHebergement.push("3");
 
-    if (currentUser.value.user2.attributes.jeudi1)
+    if (currentUser.value.user2.jeudi1)
       formState.user1.jourHebergement.push("1");
-    if (currentUser.value.user2.attributes.vendredi1)
+    if (currentUser.value.user2.vendredi1)
       formState.user1.jourHebergement.push("2");
-    if (currentUser.value.user2.attributes.samedi1)
+    if (currentUser.value.user2.samedi1)
       formState.user1.jourHebergement.push("3");
 
-    formState.user1.vegetarien = currentUser.value.user1.attributes.vegetarien1 === 1 ? true : false;
-    formState.user2.vegetarien = currentUser.value.user2.attributes.vegetarien2 === 1 ? true : false;
+    formState.user1.vegetarien = currentUser.value.user1.vegetarien1 === 1 ? true : false;
+    formState.user2.vegetarien = currentUser.value.user2.vegetarien2 === 1 ? true : false;
   }
 });
 

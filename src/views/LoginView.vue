@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import type { LoginFormState, UserEntity } from '@/common/interfaces';
 import { useStore } from 'vuex';
@@ -32,11 +32,14 @@ const formState = reactive<LoginFormState>({
 
 const router = useRouter();
 
-const listUsers = ref<UserEntity[] | undefined>(undefined);
+// const listUsers = ref<UserEntity[] | undefined>(undefined);
+
+const listUsers = computed(
+  (): UserEntity[] => store.listUsers
+);
 
 onMounted(async () => {
-  console.log(store.getters.listUsers);
-  listUsers.value = store.getters.listUsers;
+  // listUsers.value = store.getters.listUsers;
 });
 
 const onFinish = (values: LoginFormState) => {
@@ -44,6 +47,7 @@ const onFinish = (values: LoginFormState) => {
     return;
   }
   store.dispatch('login', values);
+  router.push("/reponse");
 };
 
 const onFinishFailed = (errorInfo: any) => {

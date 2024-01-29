@@ -7,9 +7,6 @@ import type {
   UserEntity,
 } from "@/common/interfaces";
 import axios from "axios";
-import { useRouter } from "vue-router";
-
-const router = useRouter();
 
 // Create a new store instance.
 const store = createStore<State>({
@@ -34,19 +31,19 @@ const store = createStore<State>({
         const currentUser = mapUserEntityToStateUser(user);
         context.commit("setCurrentUser", currentUser);
         localStorage.setItem("currentUser", JSON.stringify(currentUser));
-        router.push("/reponse");
+        // router.push("/reponse");
       } else {
         alert("Email ou mot de passe incorrect !");
       }
     },
     sendFormResult(context: any, form: FormState) {
-      if (context.currentUser === null) {
+      if (context.state.currentUser === null) {
         return;
       }
       const currentUser = {
-        id : context.currentUser.id,
+        id : context.state.currentUser.id,
         user1 : {
-          ...context.currentUser.user1,
+          ...context.state.currentUser.user1,
           presenceVin1: form.user1.participation.includes("1") ? 1 : 0,
           presenceReception1: form.user1.participation.includes("2") ? 1 : 0,
           presenceRetour1: form.user1.participation.includes("3") ? 1 : 0,
@@ -57,7 +54,7 @@ const store = createStore<State>({
           samedi1: form.user1.jourHebergement.includes("3") ? 1 : 0,
         },
         user2 : {
-          ...context.currentUser.user2,
+          ...context.state.currentUser.user2,
           presenceVin2: form.user2.participation.includes("1") ? 1 : 0,
           presenceReception2: form.user2.participation.includes("2") ? 1 : 0,
           presenceRetour2: form.user2.participation.includes("3") ? 1 : 0,
@@ -73,10 +70,10 @@ const store = createStore<State>({
         const user = mapStateUserToUserEntity(currentUser);
 
         axios
-          .post(
+          .put(
             `http://localhost:4200/api/dataconnexions/${currentUser.id}`,
             {
-              user,
+              data: user,
             }
           )
           .then((response) => {
@@ -93,19 +90,25 @@ const store = createStore<State>({
         console.error(error);
       }
     },
-  },
-  mutations: {
-    setListUsers(state: State) {
+    setListUsers({ commit }: any) {
       try {
         axios
           .get("http://localhost:4200/api/dataconnexions")
           .then((response) => {
-            console.log(response.data.data);
-            state.listUsers = (response.data.data as UserEntity[]);
+            commit('setListUsers', response.data.data as UserEntity[]);
           });
       } catch (error) {
         console.error(error);
       }
+    },
+    setCurrentUser({ commit }: any) {
+      const currentUser = JSON.parse(localStorage.getItem("currentUser")!) as { id: number; user1: UserAttributes; user2: UserAttributes; };
+      commit('setCurrentUser', currentUser);
+    },
+  },
+  mutations: {
+    setListUsers(state: State, data: UserEntity[]) {
+      state.listUsers = data;
     },
     setCurrentUser(state: State, currentUser: {id: number; user1: UserAttributes; user2: UserAttributes;}) {
       state.currentUser = currentUser;

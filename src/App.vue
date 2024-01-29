@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
-import { ref, onUnmounted, onMounted } from "vue";
+import { ref, onUnmounted, onMounted, computed } from "vue";
 import { MenuOutlined, UserOutlined } from "@ant-design/icons-vue";
 import type { DrawerProps } from "ant-design-vue";
 import type { UserEntity } from "@/common/interfaces";
@@ -11,13 +11,14 @@ const store = useStore();
 
 const placement = ref<DrawerProps["placement"]>("left");
 const open = ref<boolean>(false);
-const currentUser = ref<{id: number; user1: UserEntity; user2: UserEntity } | undefined>(undefined);
+// const currentUser = ref<{id: number; user1: UserEntity; user2: UserEntity } | undefined>(undefined);
+const currentUser = computed(
+  (): {id: number; user1: UserEntity; user2: UserEntity } => store.getters.currentUser
+);
 
 onMounted(async () => {
-  store.commit("setListUsers");
-  store.commit("setCurrentUser");
-
-  currentUser.value = store.getters.currentUser;
+  store.dispatch("setListUsers");
+  store.dispatch("setCurrentUser");
 });
 
 const showDrawer = () => {
@@ -83,12 +84,12 @@ defineProps(["currentUser"]);
       <RouterLink to="/hebergement">Hébergement</RouterLink>
       <RouterLink to="/reponse">Réponse</RouterLink>
       <a-popover trigger="hover" placement="bottom">
-        <template #title>
+        <template #title v-if="currentUser">
           <h3 class="text-center">
-            <span v-if="currentUser.user1"
+            <span v-if="currentUser?.user1"
               >{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span
             >
-            <span v-if="currentUser.user2">
+            <span v-if="currentUser?.user2">
               & {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span
             >
           </h3>
