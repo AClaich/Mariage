@@ -20,39 +20,61 @@ const store = createStore<State>({
     };
   },
   actions: {
-    login(context: State, form: LoginFormState) {
-      console.log(context.getters.listUsers);
-      console.log(context);
-      const user = context.listUsers!.find(
-        (u) =>
+    login(context: any, form: LoginFormState) {
+      const users = context.state.listUsers;
+
+      const user = users.find(
+        (u: UserEntity) =>
           u.attributes.email === form.username &&
           u.attributes.password === form.password
       );
 
       if (user) {
-        context.currentUser = context.currentUser || null;
-
-        context.currentUser = mapUserEntityToStateUser(user);
-        localStorage.setItem("currentUser", JSON.stringify(context.currentUser));
+        // context.currentUser = context.currentUser || null;
+        const currentUser = mapUserEntityToStateUser(user);
+        context.commit("setCurrentUser", currentUser);
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+        router.push("/reponse");
       } else {
         alert("Email ou mot de passe incorrect !");
       }
-      router.push("/reponse");
     },
-    sendFormResult(state: State, form: FormState) {
-      if (state.currentUser === null) {
+    sendFormResult(context: any, form: FormState) {
+      if (context.currentUser === null) {
         return;
       }
-
-      state.currentUser!.user1 = form.user1;
-      state.currentUser!.user2 = form.user2;
-
-      const user = mapStateUserToUserEntity(state.currentUser);
+      const currentUser = {
+        id : context.currentUser.id,
+        user1 : {
+          ...context.currentUser.user1,
+          presenceVin1: form.user1.participation.includes("1") ? 1 : 0,
+          presenceReception1: form.user1.participation.includes("2") ? 1 : 0,
+          presenceRetour1: form.user1.participation.includes("3") ? 1 : 0,
+          vegetarien1: form.user1.vegetarien ? 1 : 0,
+          logement1: form.user1.hebergement ? 1 : 0,
+          jeudi1: form.user1.jourHebergement.includes("1") ? 1 : 0,
+          vendredi1: form.user1.jourHebergement.includes("2") ? 1 : 0,
+          samedi1: form.user1.jourHebergement.includes("3") ? 1 : 0,
+        },
+        user2 : {
+          ...context.currentUser.user2,
+          presenceVin2: form.user2.participation.includes("1") ? 1 : 0,
+          presenceReception2: form.user2.participation.includes("2") ? 1 : 0,
+          presenceRetour2: form.user2.participation.includes("3") ? 1 : 0,
+          vegetarien2: form.user2.vegetarien ? 1 : 0,
+          logement2: form.user2.hebergement ? 1 : 0,
+          jeudi2: form.user2.jourHebergement.includes("1") ? 1 : 0,
+          vendredi2: form.user2.jourHebergement.includes("2") ? 1 : 0,
+          samedi2: form.user2.jourHebergement.includes("3") ? 1 : 0,
+        },
+      } as {id: number; user1: UserAttributes; user2: UserAttributes;}
 
       try {
+        const user = mapStateUserToUserEntity(currentUser);
+
         axios
           .post(
-            `http://localhost:4200/api/dataconnexions/${state.currentUser.id}`,
+            `http://localhost:4200/api/dataconnexions/${currentUser.id}`,
             {
               user,
             }
@@ -60,9 +82,11 @@ const store = createStore<State>({
           .then((response) => {
             console.log(response);
 
+            context.commit("setCurrentUser", currentUser);
+
             localStorage.setItem(
               "currentUser",
-              JSON.stringify(state.currentUser)
+              JSON.stringify(currentUser)
             );
           });
       } catch (error) {
@@ -83,32 +107,13 @@ const store = createStore<State>({
         console.error(error);
       }
     },
-    // login(state: State, form: LoginFormState) {
-    //   console.log(state);
-    //   const user = listUsers.find(
-    //     (u) =>
-    //       u.attributes.email === form.username &&
-    //       u.attributes.password === form.password
-    //   );
-
-    //   if (user) {
-    //     state.currentUser = state.currentUser || null;
-
-    //     state.currentUser = mapUserEntityToStateUser(user);
-    //     localStorage.setItem("currentUser", JSON.stringify(state.currentUser));
-    //   } else {
-    //     alert("Email ou mot de passe incorrect !");
-    //   }
-    // },
-    setCurrentUser(state: State) {
-      const currentUser = localStorage.getItem("currentUser") || "{}";
-      state.currentUser = currentUser ? JSON.parse(currentUser) : null;
+    setCurrentUser(state: State, currentUser: {id: number; user1: UserAttributes; user2: UserAttributes;}) {
+      state.currentUser = currentUser;
     },
     clearCurrentUser(state: State) {
       state.currentUser = null;
       localStorage.removeItem("currentUser");
-    },
-    
+    },   
   },
   getters: {
     currentUser(state: State) {
