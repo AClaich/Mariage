@@ -13,7 +13,7 @@ const placement = ref<DrawerProps["placement"]>("left");
 const open = ref<boolean>(false);
 // const currentUser = ref<{id: number; user1: UserEntity; user2: UserEntity } | undefined>(undefined);
 const currentUser = computed(
-  (): {id: number; user1: UserEntity; user2: UserEntity } => store.getters.currentUser
+  (): { id: number; user1: UserEntity; user2: UserEntity } => store.getters.currentUser
 );
 
 onMounted(async () => {
@@ -63,39 +63,34 @@ defineProps(["currentUser"]);
       </a-menu-item>
       <a-menu-item key="4">
         <span class="nav-text" @click="open = !open">
-          <RouterLink to="/reponse">Réponse</RouterLink>
+          <RouterLink to="/reponse">Réponse faire-part</RouterLink>
         </span>
       </a-menu-item>
     </a-menu>
     <template #extra>
-      <span v-if="currentUser.user1"
-        >{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span
-      >
-      <span v-if="currentUser.user2"
-        >& {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span
-      >
+      <span v-if="currentUser.user1">{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span>
+      <span v-if="currentUser.user2">& {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span>
       <UserOutlined class="user-icon" />
     </template>
   </a-drawer>
   <header>
     <nav>
-      <RouterLink to="/accueil">Accueil</RouterLink>
-      <RouterLink to="/prog">Programmation</RouterLink>
-      <RouterLink to="/hebergement">Hébergement</RouterLink>
-      <RouterLink to="/reponse">Réponse</RouterLink>
+      <RouterLink to="/accueil" class="lien">Accueil</RouterLink>
+      <RouterLink to="/prog" class="lien">Programmation</RouterLink>
+      <RouterLink to="/hebergement" class="lien">Hébergement</RouterLink>
+      <RouterLink to="/reponse" class="lien">Réponse faire-part</RouterLink>
       <a-popover trigger="hover" placement="bottom">
         <template #title v-if="currentUser">
           <h3 class="text-center">
-            <span v-if="currentUser?.user1"
-              >{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span
-            >
+            <span v-if="currentUser?.user1">{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span>
             <span v-if="currentUser?.user2">
-              & {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span
-            >
+              & {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span>
           </h3>
-          <span :onClick="logout"><LogoutOutlined /> Se déconnecter</span>
+          <span :onClick="logout">
+            <LogoutOutlined /> Se déconnecter
+          </span>
         </template>
-        <UserOutlined />
+        <UserOutlined class="icon-compte"/>
       </a-popover>
     </nav>
   </header>
@@ -119,6 +114,12 @@ defineProps(["currentUser"]);
 header {
   line-height: 1.5;
   max-height: 100vh;
+  width: calc(100vw - 32px);
+}
+
+.lien {
+  font-size: 25px;
+  font-family: Parisienne, serif;
 }
 
 .logo {
@@ -164,6 +165,10 @@ nav a:first-of-type {
 
 a-popover {
   width: 800px;
+}
+
+.icon-compte{
+  margin-left: 16px;
 }
 
 @media (min-width: 1024px) {

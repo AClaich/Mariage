@@ -261,15 +261,17 @@ onMounted(() => {
     if (currentUser.value.user2.samedi2)
       formState.user2.jourHebergement.push("3");
 
-    if (currentUser.value.user2.jeudi1)
+    if (currentUser.value.user1.jeudi1)
       formState.user1.jourHebergement.push("1");
-    if (currentUser.value.user2.vendredi1)
+    if (currentUser.value.user1.vendredi1)
       formState.user1.jourHebergement.push("2");
-    if (currentUser.value.user2.samedi1)
+    if (currentUser.value.user1.samedi1)
       formState.user1.jourHebergement.push("3");
 
     formState.user1.vegetarien = currentUser.value.user1.vegetarien1 === 1 ? true : false;
     formState.user2.vegetarien = currentUser.value.user2.vegetarien2 === 1 ? true : false;
+    formState.user1.hebergement = currentUser.value.user1.logement1 === 1 ? true : false;
+    formState.user2.hebergement = currentUser.value.user2.logement2 === 1 ? true : false;
   }
 });
 
