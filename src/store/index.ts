@@ -17,6 +17,9 @@ const store = createStore<State>({
     };
   },
   actions: {
+    logout(context: any) {
+      context.commit("clearCurrentUser");
+    },
     login(context: any, form: LoginFormState) {
       const users = context.state.listUsers;
 
@@ -29,6 +32,7 @@ const store = createStore<State>({
       if (user) {
         // context.currentUser = context.currentUser || null;
         const currentUser = mapUserEntityToStateUser(user);
+        console.log(currentUser);
         context.commit("setCurrentUser", currentUser);
         localStorage.setItem("currentUser", JSON.stringify(currentUser));
         // router.push("/reponse");
@@ -71,14 +75,12 @@ const store = createStore<State>({
 
         axios
           .put(
-            `http://localhost:4200/api/dataconnexions/${currentUser.id}`,
+            `http://localhost:4200/api/dataconnexions/${user.id}`,
             {
-              data: user,
+              data: user.attributes,
             }
           )
           .then((response) => {
-            console.log(response);
-
             context.commit("setCurrentUser", currentUser);
 
             localStorage.setItem(
@@ -137,8 +139,8 @@ const mapStateUserToUserEntity = (stateUser: {
     id: stateUser.id,
     attributes: {
       ...stateUser.user1,
-      prenom: stateUser.user1.prenom + (stateUser.user2?.prenom ?? ""),
-      nom: stateUser.user1.nom + (stateUser.user2?.nom ?? ""),
+      prenom: stateUser.user1.prenom + (stateUser.user2?.prenom ? ' & ' + stateUser.user2?.prenom : ""),
+      nom: stateUser.user1.nom + (stateUser.user2?.nom ? ' & ' + stateUser.user2?.nom : ""),
       presenceVin2: stateUser.user2?.presenceVin2 ?? 0,
       presenceReception2: stateUser.user2?.presenceReception2 ?? 0,
       presenceRetour2: stateUser.user2?.presenceRetour2 ?? 0,
@@ -163,13 +165,13 @@ const mapUserEntityToStateUser = (user: UserEntity) => {
     user1: { ...user.attributes },
     user2: { ...user.attributes },
   };
-
-  if (user.attributes.prenom.includes("&")) {
-    stateUser.user1.prenom = user.attributes.prenom.split("&")[0].trim();
-    stateUser.user2.prenom = user.attributes.prenom.split("&")[1].trim();
-    if (user.attributes.nom.includes("&")) {
-      stateUser.user1.nom = user.attributes.nom.split("&")[0].trim();
-      stateUser.user2.nom = user.attributes.nom.split("&")[1].trim();
+  console.log(stateUser)
+  if (user.attributes.prenom.includes(" & ")) {
+    stateUser.user1.prenom = user.attributes.prenom.split(" & ")[0].trim();
+    stateUser.user2.prenom = user.attributes.prenom.split(" & ")[1].trim();
+    if (user.attributes.nom.includes(" & ")) {
+      stateUser.user1.nom = user.attributes.nom.split(" & ")[0].trim();
+      stateUser.user2.nom = user.attributes.nom.split(" & ")[1].trim();
     }
   } else {
     stateUser.user1 = user.attributes;

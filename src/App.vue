@@ -5,6 +5,7 @@ import { MenuOutlined, UserOutlined } from "@ant-design/icons-vue";
 import type { DrawerProps } from "ant-design-vue";
 import type { UserEntity } from "@/common/interfaces";
 import { useStore } from "vuex";
+import router from "./router";
 
 const selectedKeys = ref<string[]>(["4"]);
 const store = useStore();
@@ -30,7 +31,8 @@ const onClose = () => {
 };
 
 const logout = () => {
-  store.commit("clearCurrentUser");
+  store.dispatch("logout");
+  router.push("/login");
 };
 
 onUnmounted(() => {
@@ -79,8 +81,8 @@ defineProps(["currentUser"]);
       <RouterLink to="/prog" class="lien">Programmation</RouterLink>
       <RouterLink to="/hebergement" class="lien">Hébergement</RouterLink>
       <RouterLink to="/reponse" class="lien">Réponse faire-part</RouterLink>
-      <a-popover trigger="hover" placement="bottom">
-        <template #title v-if="currentUser">
+      <a-popover trigger="hover" placement="bottom" v-if="currentUser">
+        <template #title>
           <h3 class="text-center">
             <span v-if="currentUser?.user1">{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span>
             <span v-if="currentUser?.user2">
@@ -92,6 +94,7 @@ defineProps(["currentUser"]);
         </template>
         <UserOutlined class="icon-compte"/>
       </a-popover>
+        <UserOutlined class="icon-compte"  v-if="!currentUser"/>
     </nav>
   </header>
 
@@ -114,7 +117,8 @@ defineProps(["currentUser"]);
 header {
   line-height: 1.5;
   max-height: 100vh;
-  width: calc(100vw - 32px);
+  width: 100vw;
+  background-color: cornsilk;
 }
 
 .lien {
@@ -130,8 +134,7 @@ header {
 nav {
   text-align: center;
   margin-top: 2rem;
-
-  margin-left: -1rem;
+  margin-bottom: 2rem;
   font-size: 1rem;
   width: 100%;
   padding: 1rem 0;

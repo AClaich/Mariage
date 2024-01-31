@@ -30,7 +30,6 @@ import { reactive } from 'vue';
 
 .bienvenue {
     text-align: center; 
-    margin-top: 10vh; 
     margin-bottom: 36px;
     font-family: Parisienne, serif;
     font-size: 60px;
