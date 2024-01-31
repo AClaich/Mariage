@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <a-row justify="space-between" align="middle">
+    <a-row justify="space-between" align="middle" class="item-ligne">
       <a-col :span="4">
         <a-card style="width: 400px" class="box-shadow">
           <h3 class="title-card">Mairie</h3>
@@ -11,6 +11,7 @@
       </a-col>
       <a-col :span="10">
         <iframe
+          width="400"
           height="250"
           style="border: 0"
           class="box-shadow"
@@ -23,8 +24,11 @@
       </a-col>
     </a-row>
     <a-row justify="space-between" align="middle">
-      <a-col :span="8">
-        <a-card style="width: 300px" class="box-shadow">
+      <a-col :span="4" class="text-align">
+        <img src="../assets/6a2b5c2e777f44abbbf8b4cf652aa16e-1920w.jpg" class="box-shadow"/>
+      </a-col>
+      <a-col :span="10">
+        <a-card style="width: 400px" class="box-shadow">
           <h3 class="title-card">Balade</h3>
           Programme en cours de réflexion. Revenez plus tard
         </a-card>
@@ -32,7 +36,7 @@
     </a-row>
     <a-row justify="space-between" align="middle">
       <a-col :span="8">
-        <a-card style="width: 300px" class="box-shadow">
+        <a-card style="width: 400px" class="box-shadow">
           <h3 class="title-card">La réception</h3>
           Le cortège des marié.e.s vous mènera ensuite, à travers les routes de
           campagne, au lieu de réception. Les festivités débuteront à 17h30 avec
@@ -45,7 +49,7 @@
     </a-row>
     <a-row justify="space-between" align="middle">
       <a-col :span="8">
-        <a-card style="width: 300px" class="box-shadow">
+        <a-card style="width: 400px" class="box-shadow">
           <h3 class="title-card">Retour de noce</h3>
           La fête continue le lendemain! Laissons nous porter par l’ambiance
           dominicale, avec un repas en extérieur à 12h, et de quoi passer la
@@ -62,9 +66,17 @@ import { reactive } from "vue";
 </script>
 
 <style scoped>
+.text-align {
+  text-align: center;
+}
+.item-ligne {
+  margin-bottom: 36px;
+}
+
 .box-shadow {
   box-shadow: 10px 5px 5px #00000026;
 }
+
 .container {
   padding-top: 36px;
   width: 100vw;
