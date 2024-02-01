@@ -21,6 +21,7 @@ export interface UserAttributes {
   email: string;
   password: string;
   number: number;
+  canInvite: number;
   isVin: number;
   isReception: number;
   isRetour: number;

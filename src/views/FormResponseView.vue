@@ -19,8 +19,27 @@ a-button {
 .container {
   height: 100vh;
   width: 100vw;
-  padding: 0 300px;
+  padding: 0 100px;
 }
+
+.items{
+  margin-top: 18px;
+}
+
+.icon-delete, .icon-valid{
+  font-size: 12px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.icon-delete {
+  color: brown;
+}
+
+.icon-valid{ 
+  color: chartreuse;
+}
+
 </style>
 
 <template>
@@ -29,30 +48,34 @@ a-button {
       <a-col :xxl="24">
         <h1 class="text-center titre">Formulaire de réponse</h1>
       </a-col>
-      <a-col :xxl="24" v-if="currentUser">
+      <a-col :xl="22" :xxl="20" v-if="currentUser">
         <a-form
           :model="formState"
           :label-col="labelCol"
           :wrapper-col="wrapperCol"
         >
           <a-row justify="center">
-            <a-col :xxl="12"> </a-col>
-            <a-col :xxl="6">
-              <span v-if="currentUser?.user1"
+            <a-col :lg="12"> </a-col>
+            <a-col :lg="6">
+              <h3 v-if="currentUser?.user1"
                 >{{ currentUser?.user1?.prenom }}
-                {{ currentUser?.user1?.nom }}</span
+                {{ currentUser?.user1?.nom }}</h3
               >
             </a-col>
-            <a-col :xxl="6">
-              <span v-if="currentUser?.user2"
+            <a-col :lg="6">
+              <h3 v-if="currentUser?.user2"
                 >{{ currentUser?.user2?.prenom }}
-                {{ currentUser?.user2?.nom }}</span
+                {{ currentUser?.user2?.nom }} <CloseOutlined v-if="currentUser?.user1.canInvite" class="icon-delete"/></h3
+              >
+              <h3 v-if="!currentUser?.user2 && currentUser?.user1.canInvite"
+                >{{ currentUser?.user2?.prenom }}
+                {{ currentUser?.user2?.nom }} <CheckOutlined class="icon-valid"/></h3
               >
             </a-col>
-            <a-col :xxl="24">
+            <a-col :lg="24" class="items">
               <a-form-item label="Vous serez présent au :">
                 <a-row>
-                  <a-col :span="12">
+                  <a-col :lg="12">
                     <a-checkbox-group
                       v-model:value="formState.user1.participation"
                     >
@@ -84,7 +107,7 @@ a-button {
                       </a-row>
                     </a-checkbox-group>
                   </a-col>
-                  <a-col :span="12">
+                  <a-col :span="6">
                     <a-checkbox-group
                       v-model:value="formState.user2.participation"
                       v-if="currentUser.user2"
@@ -231,7 +254,8 @@ a-button {
 import { onMounted, reactive, computed } from "vue";
 import type { UnwrapRef } from "vue";
 import type { FormState, UserAttributes } from "@/common/interfaces";
-import { useStore } from "vuex/types/index.d.ts";
+import { CloseOutlined, CheckOutlined } from "@ant-design/icons-vue";
+import { useStore } from "@/store";
 
 
 const store = useStore();
@@ -253,7 +277,7 @@ const formState: UnwrapRef<FormState> = reactive({
 
 const currentUser = computed(
   (): { id: number; user1: UserAttributes; user2: UserAttributes } =>
-    store.getters.currentUser
+    store.getCurrentUser!
 );
 
 onMounted(() => {
@@ -298,7 +322,7 @@ onMounted(() => {
 });
 
 const onSubmit = () => {
-  store.dispatch("sendFormResult", formState);
+  store.sendFormResult(formState);
 };
 
 const labelCol = { span: 12 };

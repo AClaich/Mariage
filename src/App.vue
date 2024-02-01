@@ -1,25 +1,24 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 import { ref, onUnmounted, onMounted, computed } from "vue";
-import { MenuOutlined, UserOutlined } from "@ant-design/icons-vue";
+import { MenuOutlined, UserOutlined, LoginOutlined } from "@ant-design/icons-vue";
 import type { DrawerProps } from "ant-design-vue";
 import type { UserAttributes } from "@/common/interfaces";
 import router from "./router";
-import { useStore } from "vuex/types/index.d.ts";
+import { useStore } from "./store";
 
 const selectedKeys = ref<string[]>(["4"]);
 const store = useStore();
 
 const placement = ref<DrawerProps["placement"]>("left");
 const open = ref<boolean>(false);
-// const currentUser = ref<{id: number; user1: UserEntity; user2: UserEntity } | undefined>(undefined);
 const currentUser = computed(
-  (): { id: number; user1: UserAttributes; user2: UserAttributes; } => store.getters.currentUser
+  (): { id: number; user1: UserAttributes; user2: UserAttributes; } => store.getCurrentUser!
 );
 
 onMounted(async () => {
-  store.dispatch("setListUsers");
-  store.dispatch("setCurrentUser");
+  store.setListUsers();
+  store.setCurrentUser();
 });
 
 const showDrawer = () => {
@@ -31,12 +30,12 @@ const onClose = () => {
 };
 
 const logout = () => {
-  store.dispatch("logout");
+  store.logout();
   router.push("/login");
 };
 
 onUnmounted(() => {
-  store.commit("clearCurrentUser");
+  store.logout();
 });
 
 defineProps(["currentUser"]);
@@ -88,9 +87,9 @@ defineProps(["currentUser"]);
             <span v-if="currentUser?.user2">
               & {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span>
           </h3>
-          <span :onClick="logout">
-            <LogoutOutlined /> Se déconnecter
-          </span>
+          <a :onClick="logout">
+            <LoginOutlined /> Se déconnecter
+          </a>
         </template>
         <UserOutlined class="icon-compte"/>
       </a-popover>
