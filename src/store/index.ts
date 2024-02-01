@@ -1,4 +1,4 @@
-import { createStore } from "vuex";
+
 import type {
   FormState,
   LoginFormState,
@@ -7,6 +7,7 @@ import type {
   UserEntity,
 } from "@/common/interfaces";
 import axios from "axios";
+import { createStore } from "vuex";
 
 // Create a new store instance.
 const store = createStore<State>({
@@ -30,12 +31,10 @@ const store = createStore<State>({
       );
 
       if (user) {
-        // context.currentUser = context.currentUser || null;
         const currentUser = mapUserEntityToStateUser(user);
         console.log(currentUser);
         context.commit("setCurrentUser", currentUser);
         localStorage.setItem("currentUser", JSON.stringify(currentUser));
-        // router.push("/reponse");
       } else {
         alert("Email ou mot de passe incorrect !");
       }

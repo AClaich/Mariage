@@ -231,7 +231,8 @@ a-button {
 import { onMounted, reactive, computed } from "vue";
 import type { UnwrapRef } from "vue";
 import type { FormState, UserAttributes } from "@/common/interfaces";
-import { useStore } from "vuex";
+import { useStore } from "vuex/types/index.d.ts";
+
 
 const store = useStore();
 

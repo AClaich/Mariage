@@ -35,7 +35,7 @@ import { reactive } from 'vue';
     font-size: 60px;
 }
 .container {
-    height: 100vh;
+    height: calc(100vh - 135px);
     width: 100vw;
     padding: 0 550px;
     background-image: url('../assets/Accueil.jpeg'), url('../assets/coeur.jpeg');

@@ -1,27 +1,42 @@
+<style>
+.container {
+  padding-top: 36px;
+  padding-left: 300px;
+  padding-right: 300px;
+  width: 100vw;
+  height: 100vw;
+}
+
+.box-shadow {
+  box-shadow: 10px 5px 5px #00000026;
+}
+</style>
+
 <template>
+  <div class="container">
+    <a-form :model="formState" name="basic" :label-col="{ span: 8 }" :wrapper-col="{ xxl: 6, sm: 24 }" autocomplete="off"
+      @finish="onFinish" @finishFailed="onFinishFailed">
+      <a-form-item label="Identifiant" name="username"
+        :rules="[{ required: true, message: 'Attention ! Vous devez entrer votre identifiant ! Sinon ça marche pas...' }]">
+        <a-input v-model:value="formState.username" />
+      </a-form-item>
+      <a-form-item label="Mot de passe" name="password"
+        :rules="[{ required: true, message: 'Attention ! Vous devez entrer votre mot de passe ! Sinon ça marche pas...' }]">
+        <a-input-password v-model:value="formState.password" />
+      </a-form-item>
 
-  <a-form :model="formState" name="basic" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }" autocomplete="off"
-    @finish="onFinish" @finishFailed="onFinishFailed">
-    <a-form-item label="Identifiant" name="username"
-      :rules="[{ required: true, message: 'Attention ! Vous devez entrer votre identifiant ! Sinon ça marche pas...' }]">
-      <a-input v-model:value="formState.username" />
-    </a-form-item>
-    <a-form-item label="Mot de passe" name="password"
-      :rules="[{ required: true, message: 'Attention ! Vous devez entrer votre mot de passe ! Sinon ça marche pas...' }]">
-      <a-input-password v-model:value="formState.password" />
-    </a-form-item>
-
-    <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-      <a-button type="primary" html-type="submit" >Se connecter</a-button>
-    </a-form-item>
-  </a-form>
+      <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
+        <a-button type="primary" html-type="submit">Se connecter</a-button>
+      </a-form-item>
+    </a-form>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive, ref, computed } from 'vue';
+import { onMounted, reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import type { LoginFormState, UserEntity } from '@/common/interfaces';
-import { useStore } from 'vuex';
+import { useStore } from "vuex/types/index.d.ts";
 
 const store = useStore();
 
@@ -35,7 +50,7 @@ const router = useRouter();
 // const listUsers = ref<UserEntity[] | undefined>(undefined);
 
 const listUsers = computed(
-  (): UserEntity[] => store.listUsers
+  (): UserEntity[] => store.getters.listUsers
 );
 
 onMounted(async () => {

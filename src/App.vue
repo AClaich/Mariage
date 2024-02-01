@@ -3,9 +3,9 @@ import { RouterLink, RouterView } from "vue-router";
 import { ref, onUnmounted, onMounted, computed } from "vue";
 import { MenuOutlined, UserOutlined } from "@ant-design/icons-vue";
 import type { DrawerProps } from "ant-design-vue";
-import type { UserEntity } from "@/common/interfaces";
-import { useStore } from "vuex";
+import type { UserAttributes } from "@/common/interfaces";
 import router from "./router";
+import { useStore } from "vuex/types/index.d.ts";
 
 const selectedKeys = ref<string[]>(["4"]);
 const store = useStore();
@@ -14,7 +14,7 @@ const placement = ref<DrawerProps["placement"]>("left");
 const open = ref<boolean>(false);
 // const currentUser = ref<{id: number; user1: UserEntity; user2: UserEntity } | undefined>(undefined);
 const currentUser = computed(
-  (): { id: number; user1: UserEntity; user2: UserEntity } => store.getters.currentUser
+  (): { id: number; user1: UserAttributes; user2: UserAttributes; } => store.getters.currentUser
 );
 
 onMounted(async () => {
