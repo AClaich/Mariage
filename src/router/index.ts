@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '@/views/LoginView.vue';
 import AccueilView from '@/views/AccueilView.vue';
+import ProgView from '@/views/ProgView.vue';
+import HebergementView from '@/views/HebergementView.vue';
+import FormResponseView from '@/views/FormResponseView.vue';
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -19,7 +22,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/ProgView.vue')
+      component: ProgView
     },
     {
       path: '/hebergement',
@@ -27,7 +30,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/HebergementView.vue')
+      component: HebergementView
     },
     {
       path: '/reponse',
@@ -42,7 +45,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/FormResponseView.vue')
+      component: FormResponseView
     },
     {
       path: '/login',

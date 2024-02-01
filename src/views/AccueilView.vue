@@ -15,9 +15,9 @@
             programmation.
         </p>
         <p class="message-important">
-            En raison du grand nombre d’invités, le mariage se fera sans enfant. Nous aurons l’occasion de retrouver vos
+            En raison du grand nombre d’invités, le mariage se fera sans enfant. Mais nous aurons l’occasion de retrouver vos
             petits
-            bouts de choux pour d’autres festivités.
+            bouts de choux pour d’autres festivités !
         </p>
     </div>
 </template>
@@ -37,7 +37,7 @@ import { reactive } from 'vue';
 .container {
     height: calc(100vh - 135px);
     width: 100vw;
-    padding: 0 550px;
+    padding: 0 570px;
     background-image: url('../assets/Accueil.jpeg'), url('../assets/coeur.jpeg');
     background-position: top left, top right;
     background-size: 500px, 500px;
@@ -50,12 +50,11 @@ p {
     line-height: 1.6;
     color: #333;
     margin: 0 0 1.5rem 0;
-    text-align: justify;
+    text-align: center;
 }
 
 .message-important {
-    color: red;
-
+    font-weight: bolder;
 }
 
 .img {

@@ -82,7 +82,7 @@ export const useStore = defineStore({
 
         const user = mapStateUserToUserEntity(currentUser);
 
-        await axios.put(`https://www.mariage-alexis-margaux.site/api/dataconnexions/${user.id}`, {
+        await axios.put(`http://localhost:4200/api/dataconnexions/${user.id}`, {
           data: user.attributes,
         });
 
@@ -95,7 +95,7 @@ export const useStore = defineStore({
     async setListUsers() {
       try {
         const response = await axios.get(
-          "https://www.mariage-alexis-margaux.site/api/dataconnexions"
+          "http://localhost:4200/api/dataconnexions"
         );
           console.log(response.data.data);
         this.listUsers = response.data.data as UserEntity[];

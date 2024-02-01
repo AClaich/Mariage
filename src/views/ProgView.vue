@@ -29,7 +29,7 @@
             <a-col :span="7">
                 <a-card style="width: 400px" class="box-shadow">
                     <h3 class="title-card">Balade</h3>
-                    Programme en cours de réflexion. Revenez plus tard
+                    Programme en cours de réflexion. Revenez plus tard !
                 </a-card>
             </a-col>
         </a-row>
@@ -39,11 +39,10 @@
                     <h3 class="title-card">La réception</h3>
                     Le cortège des marié.e.s vous mènera ensuite, à travers les routes de
                     campagne, au lieu de réception. Les festivités débuteront à 17h30 avec
-                    un vin d’honneur au Village de gîtes le Rémoulin, 56 690 Nostang (pour
+                    un vin d’honneur au Gîtes le Rémoulin, 56 690 Nostang (pour
                     plus de détails sur l'hébergement, <RouterLink to="/hebergement" class="lien">veuillez consulter la
                         rubrique
-                        correspondante</RouterLink>). Le repas commencera quant à lui vers 20h. Finalement,
-                    vers 23h, arrivera la très attendue ouverture de bal.
+                        correspondante</RouterLink>). Le repas commencera quant à lui vers 20h. Et arrivera la très attendue ouverture de bal vers 23h.
                 </a-card>
             </a-col>
 
@@ -67,7 +66,7 @@
                     La fête continue le lendemain! Laissons nous porter par l’ambiance
                     dominicale, avec un repas en extérieur à 12h, et de quoi passer la
                     journée dans la joie, le confort et la simplicité. Merci également de
-                    préciser si vous serez de la partie. Au programme, crêpe partie !
+                    préciser si vous serez des nôtres. Au programme, crêpe partie !
                 </a-card>
             </a-col>
         </a-row>
@@ -80,7 +79,7 @@ import { reactive } from "vue";
 
 <style scoped>
 .lien{
-    color: #5de27a;
+    color: #ff7875;
 }
 
 .text-align {

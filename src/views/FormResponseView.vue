@@ -54,9 +54,9 @@ a-button {
           :label-col="labelCol"
           :wrapper-col="wrapperCol"
         >
-          <a-row justify="center">
+          <a-row>
             <a-col :lg="12"> </a-col>
-            <a-col :lg="6">
+            <a-col :lg="4">
               <h3 v-if="currentUser?.user1"
                 >{{ currentUser?.user1?.prenom }}
                 {{ currentUser?.user1?.nom }}</h3
@@ -75,7 +75,7 @@ a-button {
             <a-col :lg="24" class="items">
               <a-form-item label="Vous serez présent au :">
                 <a-row>
-                  <a-col :lg="12">
+                  <a-col :lg="8">
                     <a-checkbox-group
                       v-model:value="formState.user1.participation"
                     >
@@ -144,7 +144,7 @@ a-button {
               </a-form-item>
               <a-form-item label="Végétarien ?">
                 <a-row>
-                  <a-col :span="12">
+                  <a-col :span="8">
                     <a-switch
                       v-model:checked="formState.user1.vegetarien"
                       checked-children="Oui"
@@ -166,7 +166,7 @@ a-button {
                 v-if="currentUser.user1.isReception === 1"
               >
                 <a-row>
-                  <a-col :span="12">
+                  <a-col :span="8">
                     <a-switch
                       v-model:checked="formState.user1.hebergement"
                       checked-children="Oui"
@@ -188,7 +188,7 @@ a-button {
                 v-if="currentUser?.user1.isReception === 1"
               >
                 <a-row>
-                  <a-col :span="12">
+                  <a-col :span="8">
                     <a-checkbox-group
                       v-model:value="formState.user1.jourHebergement"
                     >
