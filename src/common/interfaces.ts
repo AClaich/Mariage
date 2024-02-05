@@ -21,26 +21,26 @@ export interface UserAttributes {
   email: string;
   password: string;
   number: number;
-  canInvite: number;
-  isVin: number;
-  isReception: number;
-  isRetour: number;
-  presenceVin1: number;
-  presenceReception1: number;
-  presenceRetour1: number;
-  presenceVin2: number;
-  presenceReception2: number;
-  presenceRetour2: number;
-  vegetarien1: number;
-  logement1: number;
-  vegetarien2: number;
-  logement2: number;
-  jeudi1: number;
-  vendredi1: number;
-  samedi1: number;
-  jeudi2: number;
-  vendredi2: number;
-  samedi2: number;
+  can_invite: number;
+  is_vin: number;
+  is_reception: number;
+  is_retour: number;
+  presence_vin_1: number;
+  presence_reception_1: number;
+  presence_retour_1: number;
+  presence_vin_2: number;
+  presence_reception_2: number;
+  presence_retour_2: number;
+  vegetarien_1: number;
+  logement_1: number;
+  vegetarien_2: number;
+  logement_2: number;
+  jeudi_1: number;
+  vendredi_1: number;
+  samedi_1: number;
+  jeudi_2: number;
+  vendredi_2: number;
+  samedi_2: number;
 }
 
 export interface LoginFormState {

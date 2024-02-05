@@ -58,31 +58,31 @@ export const useStore = defineStore({
           id: this.currentUser.id,
           user1: {
             ...this.currentUser.user1,
-            presenceVin1: form.user1.participation.includes("1") ? 1 : 0,
-            presenceReception1: form.user1.participation.includes("2") ? 1 : 0,
-            presenceRetour1: form.user1.participation.includes("3") ? 1 : 0,
-            vegetarien1: form.user1.vegetarien ? 1 : 0,
-            logement1: form.user1.hebergement ? 1 : 0,
-            jeudi1: form.user1.jourHebergement.includes("1") ? 1 : 0,
-            vendredi1: form.user1.jourHebergement.includes("2") ? 1 : 0,
-            samedi1: form.user1.jourHebergement.includes("3") ? 1 : 0,
+            presence_vin_1: form.user1.participation.includes("1") ? 1 : 0,
+            presence_reception_1: form.user1.participation.includes("2") ? 1 : 0,
+            presence_retour_1: form.user1.participation.includes("3") ? 1 : 0,
+            vegetarien_1: form.user1.vegetarien ? 1 : 0,
+            logement_1: form.user1.hebergement ? 1 : 0,
+            jeudi_1: form.user1.jourHebergement.includes("1") ? 1 : 0,
+            vendredi_1: form.user1.jourHebergement.includes("2") ? 1 : 0,
+            samedi_1: form.user1.jourHebergement.includes("3") ? 1 : 0,
           },
           user2: {
             ...this.currentUser.user2,
-            presenceVin2: form.user2.participation.includes("1") ? 1 : 0,
-            presenceReception2: form.user2.participation.includes("2") ? 1 : 0,
-            presenceRetour2: form.user2.participation.includes("3") ? 1 : 0,
-            vegetarien2: form.user2.vegetarien ? 1 : 0,
-            logement2: form.user2.hebergement ? 1 : 0,
-            jeudi2: form.user2.jourHebergement.includes("1") ? 1 : 0,
-            vendredi2: form.user2.jourHebergement.includes("2") ? 1 : 0,
-            samedi2: form.user2.jourHebergement.includes("3") ? 1 : 0,
+            presence_vin_2: form.user2.participation.includes("1") ? 1 : 0,
+            presence_reception_2: form.user2.participation.includes("2") ? 1 : 0,
+            presence_retour_2: form.user2.participation.includes("3") ? 1 : 0,
+            vegetarien_2: form.user2.vegetarien ? 1 : 0,
+            logement_2: form.user2.hebergement ? 1 : 0,
+            jeudi_2: form.user2.jourHebergement.includes("1") ? 1 : 0,
+            vendredi_2: form.user2.jourHebergement.includes("2") ? 1 : 0,
+            samedi_2: form.user2.jourHebergement.includes("3") ? 1 : 0,
           },
         } as { id: number; user1: UserAttributes; user2: UserAttributes };
 
         const user = mapStateUserToUserEntity(currentUser);
 
-        await axios.put(`http://localhost:4200/api/dataconnexions/${user.id}`, {
+        await axios.put(`https://www.fonkbox.fr/api/dataconnexions/${user.id}`, {
           data: user.attributes,
         });
 
@@ -95,7 +95,7 @@ export const useStore = defineStore({
     async setListUsers() {
       try {
         const response = await axios.get(
-          "http://localhost:4200/api/dataconnexions"
+          "https://www.fonkbox.fr/api/dataconnexions"
         );
           console.log(response.data.data);
         this.listUsers = response.data.data as UserEntity[];
@@ -144,14 +144,14 @@ const mapStateUserToUserEntity = (stateUser: {
       nom:
         stateUser.user1.nom +
         (stateUser.user2?.nom ? " & " + stateUser.user2?.nom : ""),
-      presenceVin2: stateUser.user2?.presenceVin2 ?? 0,
-      presenceReception2: stateUser.user2?.presenceReception2 ?? 0,
-      presenceRetour2: stateUser.user2?.presenceRetour2 ?? 0,
-      vegetarien2: stateUser.user2?.vegetarien2 ?? 0,
-      jeudi2: stateUser.user2?.jeudi2 ?? 0,
-      vendredi2: stateUser.user2?.vendredi2 ?? 0,
-      samedi2: stateUser.user2?.samedi2 ?? 0,
-      logement2: stateUser.user2?.logement2 ?? 0,
+      presence_vin_2: stateUser.user2?.presence_vin_2 ?? 0,
+      presence_reception_2: stateUser.user2?.presence_reception_2 ?? 0,
+      presence_retour_2: stateUser.user2?.presence_retour_2 ?? 0,
+      vegetarien_2: stateUser.user2?.vegetarien_2 ?? 0,
+      jeudi_2: stateUser.user2?.jeudi_2 ?? 0,
+      vendredi_2: stateUser.user2?.vendredi_2 ?? 0,
+      samedi_2: stateUser.user2?.samedi_2 ?? 0,
+      logement_2: stateUser.user2?.logement_2 ?? 0,
     },
   };
 

@@ -65,9 +65,9 @@ a-button {
             <a-col :lg="6">
               <h3 v-if="currentUser?.user2"
                 >{{ currentUser?.user2?.prenom }}
-                {{ currentUser?.user2?.nom }} <CloseOutlined v-if="currentUser?.user1.canInvite" class="icon-delete"/></h3
+                {{ currentUser?.user2?.nom }} <CloseOutlined v-if="currentUser?.user1.can_invite" class="icon-delete"/></h3
               >
-              <h3 v-if="!currentUser?.user2 && currentUser?.user1.canInvite"
+              <h3 v-if="!currentUser?.user2 && currentUser?.user1.can_invite"
                 >{{ currentUser?.user2?.prenom }}
                 {{ currentUser?.user2?.nom }} <CheckOutlined class="icon-valid"/></h3
               >
@@ -84,7 +84,7 @@ a-button {
                           <a-checkbox
                             value="1"
                             name="vin"
-                            v-if="currentUser?.user1.isVin === 1"
+                            v-if="currentUser?.user1.is_vin === 1"
                             >Vin d'honneur</a-checkbox
                           >
                         </a-col>
@@ -92,7 +92,7 @@ a-button {
                           <a-checkbox
                             value="2"
                             name="reception"
-                            v-if="currentUser?.user1.isReception === 1"
+                            v-if="currentUser?.user1.is_reception === 1"
                             >Réception</a-checkbox
                           >
                         </a-col>
@@ -100,7 +100,7 @@ a-button {
                           <a-checkbox
                             value="3"
                             name="retour"
-                            v-if="currentUser?.user1.isRetour === 1"
+                            v-if="currentUser?.user1.is_retour === 1"
                             >Retour de noce</a-checkbox
                           >
                         </a-col>
@@ -117,7 +117,7 @@ a-button {
                           <a-checkbox
                             value="1"
                             name="vin"
-                            v-if="currentUser?.user1.isVin === 1"
+                            v-if="currentUser?.user1.is_vin === 1"
                             >Vin d'honneur</a-checkbox
                           >
                         </a-col>
@@ -125,7 +125,7 @@ a-button {
                           <a-checkbox
                             value="2"
                             name="reception"
-                            v-if="currentUser?.user1.isReception === 1"
+                            v-if="currentUser?.user1.is_reception === 1"
                             >Réception</a-checkbox
                           >
                         </a-col>
@@ -133,7 +133,7 @@ a-button {
                           <a-checkbox
                             value="3"
                             name="retour"
-                            v-if="currentUser?.user1.isRetour === 1"
+                            v-if="currentUser?.user1.is_retour === 1"
                             >Retour de noce</a-checkbox
                           >
                         </a-col>
@@ -163,7 +163,7 @@ a-button {
               </a-form-item>
               <a-form-item
                 label="Avez-vous besoin d'un logement ? (35 €/nuit/personne)"
-                v-if="currentUser.user1.isReception === 1"
+                v-if="currentUser.user1.is_reception === 1"
               >
                 <a-row>
                   <a-col :span="8">
@@ -185,7 +185,7 @@ a-button {
               </a-form-item>
               <a-form-item
                 label="Vous en avez besoin pour quels jours ?"
-                v-if="currentUser?.user1.isReception === 1"
+                v-if="currentUser?.user1.is_reception === 1"
               >
                 <a-row>
                   <a-col :span="8">
@@ -282,42 +282,42 @@ const currentUser = computed(
 
 onMounted(() => {
   if (currentUser.value.id) {
-    if (currentUser.value.user1.presenceVin1)
+    if (currentUser.value.user1.presence_vin_1)
       formState.user1.participation.push("1");
-    if (currentUser.value.user1.presenceReception1)
+    if (currentUser.value.user1.presence_reception_1)
       formState.user1.participation.push("2");
-    if (currentUser.value.user1.presenceRetour1)
+    if (currentUser.value.user1.presence_retour_1)
       formState.user1.participation.push("3");
 
-    if (currentUser.value.user2.presenceVin2)
+    if (currentUser.value.user2.presence_vin_2)
       formState.user2.participation.push("1");
-    if (currentUser.value.user2.presenceReception2)
+    if (currentUser.value.user2.presence_reception_2)
       formState.user2.participation.push("2");
-    if (currentUser.value.user2.presenceRetour2)
+    if (currentUser.value.user2.presence_retour_2)
       formState.user2.participation.push("3");
 
-    if (currentUser.value.user2.jeudi2)
+    if (currentUser.value.user2.jeudi_2)
       formState.user2.jourHebergement.push("1");
-    if (currentUser.value.user2.vendredi2)
+    if (currentUser.value.user2.vendredi_2)
       formState.user2.jourHebergement.push("2");
-    if (currentUser.value.user2.samedi2)
+    if (currentUser.value.user2.samedi_2)
       formState.user2.jourHebergement.push("3");
 
-    if (currentUser.value.user1.jeudi1)
+    if (currentUser.value.user1.jeudi_1)
       formState.user1.jourHebergement.push("1");
-    if (currentUser.value.user1.vendredi1)
+    if (currentUser.value.user1.vendredi_1)
       formState.user1.jourHebergement.push("2");
-    if (currentUser.value.user1.samedi1)
+    if (currentUser.value.user1.samedi_1)
       formState.user1.jourHebergement.push("3");
 
     formState.user1.vegetarien =
-      currentUser.value.user1.vegetarien1 === 1 ? true : false;
+      currentUser.value.user1.vegetarien_1 === 1 ? true : false;
     formState.user2.vegetarien =
-      currentUser.value.user2.vegetarien2 === 1 ? true : false;
+      currentUser.value.user2.vegetarien_2 === 1 ? true : false;
     formState.user1.hebergement =
-      currentUser.value.user1.logement1 === 1 ? true : false;
+      currentUser.value.user1.logement_1 === 1 ? true : false;
     formState.user2.hebergement =
-      currentUser.value.user2.logement2 === 1 ? true : false;
+      currentUser.value.user2.logement_2 === 1 ? true : false;
   }
 });
 

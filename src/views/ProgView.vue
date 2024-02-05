@@ -6,7 +6,7 @@
                     <h3 class="title-card">Mairie</h3>
                     Nous vous donnons rendez-vous à 13h devant la mairie de Lanester. Vous
                     avez la possibilité de vous garer soit sur le parking du Leclerc, soit
-                    sur la parking devant la piscine municipale (à 2 minutes à pieds).
+                    sur le parking devant la piscine municipale (à 2 minutes à pieds).
                 </a-card>
             </a-col>
             <a-col :span="4">

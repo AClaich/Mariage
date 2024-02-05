@@ -26,7 +26,7 @@
             </a-col>
         </a-row>
         <a-row justify="space-around" align="middle">
-            <a-col class="tarif">Tarif : 35 € / personne / nuit</a-col>
+            <a-col class="tarif">Tarif : 25 € / personne / nuit</a-col>
         </a-row>
         <a-row justify="space-around" align="middle" class="item-ligne">
             <a-col :span="7" class="text-align">
