@@ -162,7 +162,7 @@ a-button {
                 </a-row>
               </a-form-item>
               <a-form-item
-                label="Avez-vous besoin d'un logement ? (35 €/nuit/personne)"
+                label="Avez-vous besoin d'un logement ? (25 €/nuit/personne)"
                 v-if="currentUser.user1.is_reception === 1"
               >
                 <a-row>
