@@ -1,17 +1,3 @@
-<style>
-.container {
-  padding-top: 36px;
-  padding-left: 300px;
-  padding-right: 300px;
-  width: 100vw;
-  height: 100vw;
-}
-
-.box-shadow {
-  box-shadow: 10px 5px 5px #00000026;
-}
-</style>
-
 <template>
   <div class="container">
     <a-form
@@ -47,7 +33,7 @@
           },
         ]"
       >
-        <a-input-password v-model:value="formState.password" />
+        <a-input-password v-model:value="formState.password" id="password" />
       </a-form-item>
 
       <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
@@ -90,3 +76,28 @@ const onFinishFailed = (errorInfo: any) => {
 
 defineProps(["listUsers"]);
 </script>
+
+<style scoped>
+#password {
+  -webkit-text-security: disc;
+}
+.container {
+  @media (min-width: 1024px) {
+    padding-top: 36px;
+    padding-left: 300px;
+    padding-right: 300px;
+    width: 100vw;
+    height: 100vw;
+  }
+
+  @media (max-width: 1023px) {
+    padding-top: 36px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+.box-shadow {
+  box-shadow: 10px 5px 5px #00000026;
+}
+</style>

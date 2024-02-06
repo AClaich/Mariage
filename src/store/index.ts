@@ -35,11 +35,9 @@ export const useStore = defineStore({
         );
 
         if (user) {
-          console.log(user);
           const currentUser = mapUserEntityToStateUser(user);
 
           this.currentUser = currentUser;
-          console.log(currentUser);
           localStorage.setItem("currentUser", JSON.stringify(currentUser));
         } else {
           alert("Email or password is incorrect!");
@@ -47,6 +45,20 @@ export const useStore = defineStore({
       } catch (error) {
         console.error(error);
       }
+    },
+    validUser2(value: string) {
+      if (value) {
+        this.currentUser!.user2 = {
+          ...this.currentUser!.user1,
+          prenom: value.trimEnd().trimStart().split(" ")[0],
+          nom: value.trimEnd().trimStart().split(" ").length > 1 ? value.trimEnd().trimStart().split(" ")[1] : this.currentUser!.user1.nom,
+        };
+      } else {
+        this.currentUser!.user2 = {} as UserAttributes;
+      }
+    },
+    removeUser2() {
+      this.currentUser!.user2 = {} as UserAttributes;
     },
     async sendFormResult(form: FormState) {
       try {
@@ -88,6 +100,54 @@ export const useStore = defineStore({
 
         this.currentUser = currentUser;
         localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+        alert("Bravo ! Nous fiers de vous compter parmi nous ! ;) \n Vous pouvez changer vos réponses à tout moment.");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async sendFormResult2() {
+      try {
+        if (this.currentUser === null) {
+          return;
+        }
+
+        const currentUser = {
+          id: this.currentUser.id,
+          user1: {
+            ...this.currentUser.user1,
+            presence_vin_1: 0,
+            presence_reception_1: 0,
+            presence_retour_1: 0,
+            vegetarien_1:  0,
+            logement_1:  0,
+            jeudi_1: 0,
+            vendredi_1: 0,
+            samedi_1: 0,
+          },
+          user2: {
+            ...this.currentUser.user2,
+            presence_vin_2: 0,
+            presence_reception_2:  0,
+            presence_retour_2:  0,
+            vegetarien_2:  0,
+            logement_2:  0,
+            jeudi_2: 0,
+            vendredi_2: 0,
+            samedi_2:  0,
+          },
+        } as { id: number; user1: UserAttributes; user2: UserAttributes };
+
+        const user = mapStateUserToUserEntity(currentUser);
+
+        await axios.put(`https://www.fonkbox.fr/api/dataconnexions/${user.id}`, {
+          data: user.attributes,
+        });
+
+        this.currentUser = currentUser;
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+        alert("Quel dommage ! :'( \nMais ce n'est que partie remise ! \nVous pouvez changer vos réponses à tout moment.");
       } catch (error) {
         console.error(error);
       }
@@ -97,7 +157,6 @@ export const useStore = defineStore({
         const response = await axios.get(
           "https://www.fonkbox.fr/api/dataconnexions"
         );
-          console.log(response.data.data);
         this.listUsers = response.data.data as UserEntity[];
       } catch (error) {
         console.error(error);

@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 import { ref, onUnmounted, onMounted, computed } from "vue";
-import { MenuOutlined, UserOutlined, LoginOutlined } from "@ant-design/icons-vue";
+import {
+  MenuOutlined,
+  UserOutlined,
+  LoginOutlined,
+} from "@ant-design/icons-vue";
 import type { DrawerProps } from "ant-design-vue";
 import type { UserAttributes } from "@/common/interfaces";
 import router from "./router";
@@ -13,7 +17,8 @@ const store = useStore();
 const placement = ref<DrawerProps["placement"]>("left");
 const open = ref<boolean>(false);
 const currentUser = computed(
-  (): { id: number; user1: UserAttributes; user2: UserAttributes; } => store.getCurrentUser!
+  (): { id: number; user1: UserAttributes; user2: UserAttributes } =>
+    store.getCurrentUser!
 );
 
 onMounted(async () => {
@@ -69,9 +74,18 @@ defineProps(["currentUser"]);
       </a-menu-item>
     </a-menu>
     <template #extra>
-      <span v-if="currentUser && currentUser.user1">{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span>
-      <span v-if="currentUser && currentUser.user2">& {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span>
-      <UserOutlined class="user-icon" />
+      <span v-if="currentUser && currentUser.user1"
+        >{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span
+      >
+      <span v-if="currentUser && currentUser.user2.prenom">
+        & {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span
+      >
+      <a-popover trigger="hover" placement="bottom" v-if="currentUser">
+        <template #title>
+          <a :onClick="logout"> <LoginOutlined /> Se déconnecter </a>
+        </template>
+        <UserOutlined class="icon-compte" />
+      </a-popover>
     </template>
   </a-drawer>
   <header>
@@ -83,17 +97,18 @@ defineProps(["currentUser"]);
       <a-popover trigger="hover" placement="bottom" v-if="currentUser">
         <template #title>
           <h3 class="text-center">
-            <span v-if="currentUser?.user1">{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span>
-            <span v-if="currentUser?.user2">
-              & {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span>
+            <span v-if="currentUser?.user1"
+              >{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}
+            </span>
+            <span v-if="currentUser?.user2.prenom">
+              & {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span
+            >
           </h3>
-          <a :onClick="logout">
-            <LoginOutlined /> Se déconnecter
-          </a>
+          <a :onClick="logout"> <LoginOutlined /> Se déconnecter </a>
         </template>
-        <UserOutlined class="icon-compte"/>
+        <UserOutlined class="icon-compte" />
       </a-popover>
-        <UserOutlined class="icon-compte"  v-if="!currentUser"/>
+      <UserOutlined class="icon-compte" v-if="!currentUser" />
     </nav>
   </header>
 
@@ -169,7 +184,7 @@ a-popover {
   width: 800px;
 }
 
-.icon-compte{
+.icon-compte {
   margin-left: 16px;
 }
 
