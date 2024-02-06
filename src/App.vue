@@ -69,8 +69,8 @@ defineProps(["currentUser"]);
       </a-menu-item>
     </a-menu>
     <template #extra>
-      <span v-if="currentUser.user1">{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span>
-      <span v-if="currentUser.user2">& {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span>
+      <span v-if="currentUser && currentUser.user1">{{ currentUser.user1.prenom }} {{ currentUser.user1.nom }}</span>
+      <span v-if="currentUser && currentUser.user2">& {{ currentUser.user2.prenom }} {{ currentUser.user2.nom }}</span>
       <UserOutlined class="user-icon" />
     </template>
   </a-drawer>
