@@ -101,7 +101,7 @@ export const useStore = defineStore({
         this.currentUser = currentUser;
         localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
-        alert("Bravo ! Nous fiers de vous compter parmi nous ! ;) \n Vous pouvez changer vos réponses à tout moment.");
+        alert("Bravo ! Nous sommes fiers de vous compter parmi nous ! ;) \n Vous pouvez changer vos réponses à tout moment.");
       } catch (error) {
         console.error(error);
       }
