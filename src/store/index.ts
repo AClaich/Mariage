@@ -30,8 +30,8 @@ export const useStore = defineStore({
 
         const user = users.find(
           (u: UserEntity) =>
-            u.attributes.email === form.username &&
-            u.attributes.password === form.password
+            u.attributes.email.toLowerCase().trim() === form.username.toLocaleLowerCase().trim() &&
+            u.attributes.password.toLocaleLowerCase().trim() === form.password.toLocaleLowerCase().trim()
         );
 
         if (user) {
