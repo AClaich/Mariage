@@ -4,9 +4,7 @@ import AccueilView from '@/views/AccueilView.vue';
 import ProgView from '@/views/ProgView.vue';
 import HebergementView from '@/views/HebergementView.vue';
 import FormResponseView from '@/views/FormResponseView.vue';
-import { useStore } from "vuex";
-
-const store = useStore();
+import CagnotteView from '@/views/CagnotteView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +29,14 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: HebergementView
+    },
+    {
+      path: '/cagnotte',
+      name: 'cagnotte',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: CagnotteView
     },
     {
       path: '/reponse',

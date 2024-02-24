@@ -56,13 +56,21 @@ import { reactive } from "vue";
   font-size: 60px;
 }
 .container {
-  @media (min-width: 1024px) {
+  height: calc(100vh - 135px);
+  width: 100vw;
+  padding: 0 570px;
+  background-image: url("../assets/Accueil.jpeg"), url("../assets/coeur.jpeg");
+  background-position: top left, top right;
+  background-size: 500px, 500px;
+  background-repeat: no-repeat, no-repeat;
+
+  @media (max-width: 1537px) {
     height: calc(100vh - 135px);
     width: 100vw;
-    padding: 0 570px;
+    padding: 0 480px;
     background-image: url("../assets/Accueil.jpeg"), url("../assets/coeur.jpeg");
     background-position: top left, top right;
-    background-size: 500px, 500px;
+    background-size: 460px, 460px;
     background-repeat: no-repeat, no-repeat;
   }
 

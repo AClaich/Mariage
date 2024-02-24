@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <a-row justify="center" align="middle">
+      <a-col class="rendez-vous">Rendez-vous le 31 août 2024</a-col>
+    </a-row>
     <a-row justify="space-around" align="middle" class="item-ligne">
       <a-col :span="7">
         <a-card class="box-shadow">
@@ -177,6 +180,13 @@ import { reactive } from "vue";
 </script>
 
 <style scoped>
+.rendez-vous {
+  font-family: Parisienne, serif;
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
 .lien {
   color: #ff7875;
 }
@@ -196,10 +206,16 @@ import { reactive } from "vue";
 }
 
 .container {
-  @media (min-width: 1024px) {
+  padding-top: 36px;
+  padding-left: 300px;
+  padding-right: 300px;
+  width: 100vw;
+  height: 100%;
+
+  @media (max-width: 1537px) {
     padding-top: 36px;
-    padding-left: 300px;
-    padding-right: 300px;
+    padding-left: 100px;
+    padding-right: 100px;
     width: 100vw;
     height: 100%;
   }

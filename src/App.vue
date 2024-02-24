@@ -93,6 +93,7 @@ defineProps(["currentUser"]);
       <RouterLink to="/accueil" class="lien">Accueil</RouterLink>
       <RouterLink to="/prog" class="lien">Programmation</RouterLink>
       <RouterLink to="/hebergement" class="lien">Hébergement</RouterLink>
+      <RouterLink to="/cagnotte" class="lien">Cagnotte</RouterLink>
       <RouterLink to="/reponse" class="lien">Réponse faire-part</RouterLink>
       <a-popover trigger="hover" placement="bottom" v-if="currentUser">
         <template #title>

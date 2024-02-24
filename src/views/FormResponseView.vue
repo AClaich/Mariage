@@ -152,12 +152,13 @@
               </a-form-item>
               <a-form-item
                 label="Vous en avez besoin pour quels jours ?"
-                v-if="currentUser?.user1.is_reception === 1"
+                v-if="currentUser?.user1.is_reception === 1 && (formState.user2.hebergement || formState.user1.hebergement)"
               >
                 <a-row>
                   <a-col :span="8">
                     <a-checkbox-group
                       v-model:value="formState.user1.jourHebergement"
+                      v-if="formState.user1.hebergement"
                     >
                       <a-row>
                         <a-col :span="24">
@@ -179,6 +180,7 @@
                   <a-col :span="12" v-if="currentUser.user2.prenom">
                     <a-checkbox-group
                       v-model:value="formState.user2.jourHebergement"
+                      v-if="currentUser?.user2 && formState.user2.hebergement"
                     >
                       <a-row>
                         <a-col :span="24">
