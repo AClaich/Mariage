@@ -141,7 +141,7 @@ export const useStore = defineStore({
         const user = mapStateUserToUserEntity(currentUser);
 
         await axios.put(`https://www.fonkbox.fr/api/dataconnexions/${user.id}`, {
-          data: user.attributes,
+          data: {...user.attributes, published_at: '0'},
         });
 
         this.currentUser = currentUser;

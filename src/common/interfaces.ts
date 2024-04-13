@@ -41,6 +41,7 @@ export interface UserAttributes {
   jeudi_2: number;
   vendredi_2: number;
   samedi_2: number;
+  published_at: string;
 }
 
 export interface LoginFormState {
