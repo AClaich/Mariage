@@ -43,7 +43,9 @@
       <a-col :span="7">
         <a-card style="width: 400px" class="box-shadow">
           <h3 class="title-card">Balade</h3>
-          Programme en cours de réflexion. Revenez plus tard !
+          Après la mairie, le cortège se dirigera au gîte de Rémoulin, où vous pourrez prendre le temps de vous répartir dans vos chambres attitrés et de poser vos valises.<br>
+          Pour ceux qui le souhaitent, il sera organisé une balade champêtre automobile, le long des côtes et du golf du morbihan. 
+          Les autres pourront profiter du site de Remoulin, en attendant.<br> Nous nous retrouverons pour le vin d'Honneur à 17h30.
         </a-card>
       </a-col>
     </a-row>
@@ -51,8 +53,7 @@
       <a-col :span="7">
         <a-card style="width: 400px" class="box-shadow">
           <h3 class="title-card">La réception</h3>
-          Le cortège des marié.e.s vous mènera ensuite, à travers les routes de
-          campagne, au lieu de réception. Les festivités débuteront à 17h30 avec
+          Les festivités débuteront à 17h30 avec
           un vin d’honneur au Gîtes le Rémoulin, 56 690 Nostang (pour plus de
           détails sur l'hébergement,
           <RouterLink to="/hebergement" class="lien"
@@ -88,9 +89,11 @@
         <a-card style="width: 400px" class="box-shadow">
           <h3 class="title-card">Retour de noce</h3>
           La fête continue le lendemain! Laissons nous porter par l’ambiance
-          dominicale, avec un repas en extérieur à 12h, et de quoi passer la
-          journée dans la joie, le confort et la simplicité. Merci également de
-          préciser si vous serez des nôtres. Au programme, crêpe partie !
+          dominicale, avec un repas en extérieur à 12h et des activités libres et diverses (pensez à rapportez vos boules de pétanques)          <br>
+          Tout ce qu'il faut pour passer la journée dans la joie, le confort et la simplicité. 
+          Merci également de préciser si vous serez des nôtres. Au programme, crêpe partie !
+          <br>          <br>
+          <bold>Ce jour, les enfants sont évidemment les bienvenu pour passer ce lendemain de noce avec nous.</bold>
         </a-card>
       </a-col>
     </a-row>
@@ -125,7 +128,9 @@
       <a-col :span="24">
         <a-card class="box-shadow">
           <h3 class="title-card">Balade</h3>
-          Programme en cours de réflexion. Revenez plus tard !
+          Après la mairie, le cortège se dirigera au gîte de Rémoulin, où vous pourrez prendre le temps de vous répartir dans vos chambres attitrés et de poser vos valises.<br>
+          Pour ceux qui le souhaitent, il sera organisé une balade champêtre automobile, le long des côtes et du golf du morbihan. 
+          Les autres pourront profiter du site de Remoulin, en attendant.<br> Nous nous retrouverons pour le vin d'Honneur à 17h30.
         </a-card>
       </a-col>
       <a-col :span="24" class="text-align">
@@ -138,8 +143,7 @@
       <a-col :span="24">
         <a-card class="box-shadow">
           <h3 class="title-card">La réception</h3>
-          Le cortège des marié.e.s vous mènera ensuite, à travers les routes de
-          campagne, au lieu de réception. Les festivités débuteront à 17h30 avec
+          Les festivités débuteront à 17h30 avec
           un vin d’honneur au Gîtes le Rémoulin, 56 690 Nostang (pour plus de
           détails sur l'hébergement,
           <RouterLink to="/hebergement" class="lien"
@@ -159,9 +163,11 @@
         <a-card class="box-shadow">
           <h3 class="title-card">Retour de noce</h3>
           La fête continue le lendemain! Laissons nous porter par l’ambiance
-          dominicale, avec un repas en extérieur à 12h, et de quoi passer la
-          journée dans la joie, le confort et la simplicité. Merci également de
-          préciser si vous serez des nôtres. Au programme, crêpe partie !
+          dominicale, avec un repas en extérieur à 12h et des activités libres et diverses (pensez à rapportez vos boules de pétanques)          <br>
+          Tout ce qu'il faut pour passer la journée dans la joie, le confort et la simplicité. 
+          Merci également de préciser si vous serez des nôtres. Au programme, crêpe partie !
+          <br>          <br>
+          <bold>Ce jour, les enfants sont évidemment les bienvenu pour passer ce lendemain de noce avec nous.</bold>
         </a-card>
       </a-col>
       <a-col :span="24" class="text-align">
@@ -239,5 +245,9 @@ import { reactive } from "vue";
   font-size: 28px;
   text-align: center;
   margin-bottom: 15px;
+}
+
+bold{
+  font-weight: bold;
 }
 </style>
