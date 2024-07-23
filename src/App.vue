@@ -69,6 +69,11 @@ defineProps(["currentUser"]);
       </a-menu-item>
       <a-menu-item key="4">
         <span class="nav-text" @click="open = !open">
+          <RouterLink to="/cagnotte">Cagnotte</RouterLink>
+        </span>
+      </a-menu-item>
+      <a-menu-item key="5">
+        <span class="nav-text" @click="open = !open">
           <RouterLink to="/reponse">Réponse faire-part</RouterLink>
         </span>
       </a-menu-item>

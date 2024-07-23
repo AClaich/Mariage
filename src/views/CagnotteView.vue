@@ -1,18 +1,45 @@
 <template>
-     <div class="container">
-    <a-row justify="center" align="middle" class="item-ligne">
-      <a-col :span="18">
+  <div class="container">
+    <a-row justify="space-around" align="middle" class="item-ligne">
+      <a-col :span="12">
         <a-card class="box-shadow">
           <h1 class="titre">La cagnotte de noce</h1>
           <p class="text-align">
-            Une cagnotte de noce sera disponible dans la salle de réception le jour J. 
-            Si vous souhaitez participer, vous pourrez également le faire en ligne à partir du mois de juillet.
+            Une cagnotte de noce sera disponible dans la salle de réception le jour J.<br>
+            Enveloppes et crayons seront à votre disposition.
           </p>
         </a-card>
       </a-col>
+      <a-col :span="7" class="text-align">
+        <img
+          width="300"
+          src="../assets/urneMariage.jpg"
+          class="box-shadow"
+        />
+      </a-col>
     </a-row>
   </div>
-  </template>
+  <div class="container-mobile">
+    <a-row justify="end" align="middle" class="item-ligne">
+      <a-col :span="11">
+        <a-card class="box-shadow">
+          <h1 class="titre">La cagnotte de noce</h1>
+          <p class="text-align">
+            Une cagnotte de noce sera disponible dans la salle de réception le jour J.<br>
+            Enveloppes et crayons seront à votre disposition.
+          </p>
+        </a-card>
+      </a-col>
+      <a-col :span="11" class="text-align">
+        <img
+          width="300"
+          src="../assets/urneMariage.jpg"
+          class="box-shadow"
+        />
+      </a-col>
+    </a-row>
+  </div>
+</template>
   
   <script lang="ts" setup>
   import { reactive } from "vue";

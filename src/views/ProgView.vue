@@ -43,8 +43,8 @@
       <a-col :span="7">
         <a-card style="width: 400px" class="box-shadow">
           <h3 class="title-card">Balade</h3>
-          Après la mairie, le cortège se dirigera au gîte de Rémoulin, où vous pourrez prendre le temps de vous répartir dans vos chambres attitrés et de poser vos valises.<br>
-          Pour ceux qui le souhaitent, il sera organisé une balade champêtre automobile, le long des côtes et du golf du morbihan. 
+          Après la mairie, le cortège se dirigera au gîte de Rémoulin, où vous pourrez prendre le temps de vous répartir dans vos chambres attitrées et de poser vos valises.<br>
+          Pour ceux qui le souhaitent, il sera organisé une balade champêtre automobile, le long des côtes et du Golfe du Morbihan. 
           Les autres pourront profiter du site de Remoulin, en attendant.<br> Nous nous retrouverons pour le vin d'Honneur à 17h30.
         </a-card>
       </a-col>
@@ -93,7 +93,7 @@
           Tout ce qu'il faut pour passer la journée dans la joie, le confort et la simplicité. 
           Merci également de préciser si vous serez des nôtres. Au programme, crêpe partie !
           <br>          <br>
-          <bold>Ce jour, les enfants sont évidemment les bienvenu pour passer ce lendemain de noce avec nous.</bold>
+          <bold>Ce jour, les enfants sont évidemment les bienvenus pour passer ce lendemain de noce avec nous.</bold>
         </a-card>
       </a-col>
     </a-row>
@@ -128,8 +128,8 @@
       <a-col :span="24">
         <a-card class="box-shadow">
           <h3 class="title-card">Balade</h3>
-          Après la mairie, le cortège se dirigera au gîte de Rémoulin, où vous pourrez prendre le temps de vous répartir dans vos chambres attitrés et de poser vos valises.<br>
-          Pour ceux qui le souhaitent, il sera organisé une balade champêtre automobile, le long des côtes et du golf du morbihan. 
+          Après la mairie, le cortège se dirigera au gîte de Rémoulin, où vous pourrez prendre le temps de vous répartir dans vos chambres attitrées et de poser vos valises.<br>
+          Pour ceux qui le souhaitent, il sera organisé une balade champêtre automobile, le long des côtes et du Golfe du Morbihan. 
           Les autres pourront profiter du site de Remoulin, en attendant.<br> Nous nous retrouverons pour le vin d'Honneur à 17h30.
         </a-card>
       </a-col>
@@ -167,7 +167,7 @@
           Tout ce qu'il faut pour passer la journée dans la joie, le confort et la simplicité. 
           Merci également de préciser si vous serez des nôtres. Au programme, crêpe partie !
           <br>          <br>
-          <bold>Ce jour, les enfants sont évidemment les bienvenu pour passer ce lendemain de noce avec nous.</bold>
+          <bold>Ce jour, les enfants sont évidemment les bienvenus pour passer ce lendemain de noce avec nous.</bold>
         </a-card>
       </a-col>
       <a-col :span="24" class="text-align">
